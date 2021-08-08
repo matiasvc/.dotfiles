@@ -1,0 +1,10 @@
+#!/bin/bash
+
+tarsnap -c \
+	-f "$(uname -n)-$(date +%Y-%m-%d_%H-%M-%S)" \
+	--configfile ~/.tarsnaprc \
+	--print-stats --humanize-numbers \
+	/home/matiasvc/.dotfiles \
+	/home/matiasvc/Obsidian \
+	/home/matiasvc/src
+

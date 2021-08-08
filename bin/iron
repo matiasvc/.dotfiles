@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# A script to simplify interaction with the Kingston Ironkey
+
+
+case $1 in
+
+	login)
+		# Check if Ironkey is plugged in
+		if [ ! -L "/dev/disk/by-label/IRONKEY" ]; then
+			echo "Unable to detect Ironkey."
+			exit 1
+		fi
+
+		# Make shure the utility disk is mounted
+		if [ ! -d "/media/${USER}/IRONKEY" ]; then
+			udisksctl mount -b /dev/disk/by-label/IRONKEY
+		fi
+
+		# Run the login utility
+		if /media/${USER}/IRONKEY/linux/linux64/ikd300s_login; then
+			# Wait until the disk appears
+			while [ ! -L /dev/disk/by-label/KINGSTON ]; do sleep 0.1; done
+
+			# Mount the data disk if it isn't already mounted
+			if [ ! -d "/media/${USER}/KINGSTON" ]; then
+				udisksctl mount -b /dev/disk/by-label/KINGSTON
+
+				# Add a symlink to the home folder if it doesn't already exist
+				if [ ! -L "${HOME}/Ironkey" ]; then
+					ln -fs "/media/${USER}/KINGSTON" "${HOME}/Ironkey"
+				fi
+			fi
+		fi
+		;;
+
+	logout)
+		# Check if Ironkey is plugged in
+		if [ ! -L "/dev/disk/by-label/IRONKEY" ]; then
+			echo "Unable to detect Ironkey."
+			exit 1
+		fi
+
+		# Make shure the utility disk is mounted
+		if [ ! -d "/media/${USER}/IRONKEY" ]; then
+			udisksctl mount -b /dev/disk/by-label/IRONKEY
+		fi
+
+		/media/${USER}/IRONKEY/linux/linux64/ikd300s_logout
+		;;
+
+	*)
+		echo "Unknown"
+		;;
+esac
+

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+HOSTNAME=`hostname`
+
+if [ $HOSTNAME = "matiasvc-desktop" ]; then
+	DPI=92
+	xrandr --output HDMI-0 --auto --dpi $DPI
+	xrandr --output HDMI-1 --auto --right-of HDMI-0
+elif [ $HOSTNAME = "oslh-00016-d" ]; then
+	echo "setup-screens: Work Mode (Desktop)"
+	xrandr --output DP-2 --auto
+	xrandr --output DP-0 --auto --left-of DP-2
+elif [ $HOSTNAME = "oslh-00152-l" ]; then
+	echo "setup-screens: Work Mode (Laptop)"
+	xrandr --output eDP-1-1 --auto
+	xrandr --output HDMI-0 --auto --right-of eDP-1-1
+elif [ $HOSTNAME = "matiasvc-macbook" ]; then
+	DPI=220
+	xrandr --output DP-2 --auto --dpi $DPI
+fi
+

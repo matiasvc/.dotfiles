@@ -1,0 +1,31 @@
+#!/bin/bash
+EXTERNAL_OUTPUT="HDMI-0"
+INTERNAL_OUTPUT="DP-2"
+
+EXTERNAL_DPI="92"
+INTERNAL_DPI="220"
+
+# if we don't have a file, start at zero
+if [ ! -f "/tmp/monitor_mode.dat" ] ; then
+  monitor_mode="SPAN"
+
+# otherwise read the value from the file
+else
+  monitor_mode=`cat /tmp/monitor_mode.dat`
+fi
+
+if [ $monitor_mode = "SPAN" ]; then
+        monitor_mode="EXTERNAL"
+        xrandr --dpi $EXTERNAL_DPI --output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto
+elif [ $monitor_mode = "EXTERNAL" ]; then
+        monitor_mode="INTERNAL"
+        xrandr --dpi $INTERNAL_DPI --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
+elif [ $monitor_mode = "INTERNAL" ]; then
+        monitor_mode="CLONES"
+        xrandr --dpi $EXTERNAL_DPI --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --same-as $INTERNAL_OUTPUT
+else
+        monitor_mode="SPAN"
+        xrandr --dpi $EXTERNAL_DPI --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --left-of $INTERNAL_OUTPUT
+fi
+notify-send "Monitor mode: ${monitor_mode}"
+echo "${monitor_mode}" > /tmp/monitor_mode.dat

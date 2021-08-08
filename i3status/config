@@ -1,0 +1,16 @@
+general {
+	colors = true
+	interval = 5
+}
+
+order += "cpu_usage"
+cpu_usage {
+	format = "CPU %usage"
+	max_threshold = 75
+}
+
+order += "volume master"
+volume master {
+	format = "♪:%volume"
+	format_muted = "♪: muted(%volume)"
+}

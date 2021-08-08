@@ -1,0 +1,13 @@
+Host *
+	AddKeysToAgent yes
+	IdentityFile ~/.ssh/personal
+
+Host 10.11.99.1
+	IdentityFile ~/.ssh/reMarkable
+
+Host github.com
+	User git
+	HostName github.com
+	IdentityFile ~/.ssh/personal
+
+
