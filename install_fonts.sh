@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # This script with install the patched Hack font from https://github.com/ryanoasis/nerd-fonts
 

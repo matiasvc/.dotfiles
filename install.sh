@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # This script installs all needed programs and libraries.
 
@@ -43,6 +43,7 @@ sudo apt update
 # imagemagick: image utilities
 # cifs-utils: utilities for mounting SMB/CIFS shares
 # w3m-img: display images in ranger
+# mosh: ssh alternative with better support for high latency or unstable connections
 sudo apt-get install -y \
 	build-essential \
 	wget curl \
@@ -56,21 +57,19 @@ sudo apt-get install -y \
 	ninja-build \
 	vlc \
 	python3 python3-pip \
-	polybar \
 	shellcheck \
 	ncdu \
 	gparted \
 	cifs-utils \
-	w3m-img
-
-
+	w3m-img \
+	mosh
 
 # Install i3wm
-echo "Would you like to install i3?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v i3)" ]; then
+if [ ! -x "$(command -v i3)" ]; then
+	echo "Would you like to install i3?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing i3 <<<<"
 				# Install the key
 				/usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2021.02.02_all.deb /tmp/keyring.deb SHA256:cccfb1dd7d6b1b6a137bb96ea5b5eef18a0a4a6df1d6c0c37832025d2edaa710
@@ -81,117 +80,154 @@ select yn in "Yes" "No"; do
 				sudo ln -s ${APT_PATH}/sur5r-i3.list /etc/apt/sources.list.d/sur5r-i3.list
 
 				sudo apt update && sudo apt install -y i3
-			else
-				echo ">>>> i3 is already installed <<<<"
-			fi
-			; break;;
-		No )
-			echo "Skipping i3"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping i3"
+				break;;
+		esac
+	done
+else
+	echo ">>>> i3 is already installed <<<<"
+fi
+
+# Install i3blocks
+if [ ! -x "$(command -v i3blocks)" ]; then
+	echo "Would you like to install i3blocks?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
+				echo ">>>> Installing i3blocks <<<<"
+				I3BLOCKS_VERSION='1.5'
+				rm -rf /tmp/i3blocks
+				mkdir /tmp/i3blocks
+				git clone --depth 1 --branch ${I3BLOCKS_VERSION} https://github.com/vivien/i3blocks.git /tmp/i3blocks
+				/tmp/i3blocks/autogen.sh
+				/tmp/i3blocks/configure
+				make -C /tmp/i3blocks
+				sudo make -C /tmp/i3blocks install
+
+				break;;
+			No )
+				echo "Skipping i3blocks"
+				break;;
+		esac
+	done
+else
+	echo ">>>> i3blocks is already installed <<<<"
+fi
 
 # install fd
-echo "Would you like to install fd?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v fd)" ]; then
+if [ ! -x "$(command -v fd)" ]; then
+	echo "Would you like to install fd?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing fd <<<<"
 				FD_VERSION='8.2.1'
 				wget -P /tmp/ https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd_${FD_VERSION}_amd64.deb
 				sudo dpkg -i /tmp/fd_${FD_VERSION}_amd64.deb
-			else
-				echo ">>>> fd is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fd"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fd"
+				break;;
+		esac
+	done
+else
+	echo ">>>> fd is already installed <<<<"
+fi
 
 # install fzf
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -d "${HOME}/.fzf" ]; then
+if [ ! -d "${HOME}/.fzf" ]; then
+	echo "Would you like to install fzf?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing fzf <<<<"
 				FZF_VERSION='0.27.2'
 				git clone --depth 1 --branch ${FZF_VERSION} https://github.com/junegunn/fzf.git ${HOME}/.fzf
 				${HOME}/.fzf/install
-			else
-				echo ">>>> fzf is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
+else
+	echo ">>>> fzf is already installed <<<<"
+fi
 
 # install ranger
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v ranger)" ]; then
+if [ ! -x "$(command -v ranger)" ]; then
+	echo "Would you like to install ranger?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing ranger <<<<"
 				RANGER_VERSION='1.9.3'
 				git clone --depth 1 --branch v${RANGER_VERSION} https://github.com/ranger/ranger.git /tmp/ranger
 				sudo apt update && sudo apt install -y python python3 # Install requirements
 				# TODO: Look at other relevant ranger preview programs
 				sudo make -C /tmp/ranger/ install
-			else
-				echo ">>>> ranger is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
+else
+	echo ">>>> ranger is already installed <<<<"
+fi
 
 # install neovim
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v nvim)" ]; then
+if [ ! -x "$(command -v nvim)" ]; then
+	echo "Would you like to install neovim?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing neovim <<<<"
 				# Copy apt file
 				sudo rm -f /etc/apt/sources.list.d/neovim.list
 				sudo ln -s ${APT_PATH}/neovim.list /etc/apt/sources.list.d/neovim.list
 				sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 55F96FCF8231B6DD
 				sudo apt update && sudo apt install -y neovim
-			else
-				echo ">>>> neovim is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
+else
+	echo ">>>> neovim is already installed <<<<"
+fi
 
 # install alacritty
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v alacritty)" ]; then
+if [ ! -x "$(command -v alacritty)" ]; then
+	echo "Would you like to install alacritty?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing alacritty <<<<"
 				# Copy apt file
 				sudo rm -f /etc/apt/sources.list.d/alacritty.list
 				sudo ln -s ${APT_PATH}/alacritty.list /etc/apt/sources.list.d/alacritty.list
 				sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8AC9B4BBBAB4900B
 				sudo apt update && sudo apt install -y alacritty
-			else
-				echo ">>>> alacritty is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
+else
+	echo ">>>> alacritty is already installed <<<<"
+fi
 
 # install tarsnap
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v tarsnap)" ]; then
+if [ ! -x "$(command -v tarsnap)" ]; then
+	echo "Would you like to install alacritty?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing tarsnap <<<<"
 
 				wget -q https://pkg.tarsnap.com/tarsnap-deb-packaging-key.asc -O- | sudo apt-key add -
@@ -201,20 +237,22 @@ select yn in "Yes" "No"; do
 
 				sudo apt update
 				sudo apt install -y tarsnap
-			else
-				echo ">>>> tarsnap is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
+else
+	echo ">>>> tarsnap is already installed <<<<"
+fi
 
 # install llvm12
-echo "Would you like to install fzf?"
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			if [ ! -x "$(command -v clang-12)" ]; then
+if [ ! -x "$(command -v clang-12)" ]; then
+	echo "Would you like to install llvm12?"
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
 				echo ">>>> Installing llvm12 <<<<"
 				sudo wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
 				sudo rm -f /etc/apt/sources.list.d/llvm12.list
@@ -238,18 +276,19 @@ select yn in "Yes" "No"; do
 				lldb lldb-argdumper lldb-instr lldb-server lldb-vscode \
 				lld lld-link
 				do
-					echo $TOOL_NAME
 					sudo rm -f /usr/local/bin/$TOOL_NAME
 					sudo ln -s /usr/bin/$TOOL_NAME-12 /usr/local/bin/$TOOL_NAME
 				done
+				break;;
+			No )
+				echo "Skipping fzf"
+				break;;
+		esac
+	done
 
-			else
-				echo ">>>> llvm12 is already installed <<<<"
-			fi
-		No )
-			echo "Skipping fzf"
-	esac
-done
+else
+	echo ">>>> llvm12 is already installed <<<<"
+fi
 
 # install gcc-10 and g++-10
 # Not needed as hirsute ships with gcc-10 and g++-10

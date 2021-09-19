@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # install zsh with oh-my-zsh and change shell
 if ! [ -x "$(command -v zsh)" ]; then
