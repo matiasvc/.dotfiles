@@ -1,13 +1,11 @@
-Host *
-	AddKeysToAgent yes
-	IdentityFile ~/.ssh/personal
+Include ~/.ssh/work_config
 
 Host 10.11.99.1
 	IdentityFile ~/.ssh/reMarkable
 
 Host github.com
-	User git
 	HostName github.com
+	User git
+	AddKeysToAgent yes
 	IdentityFile ~/.ssh/personal
-
 

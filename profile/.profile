@@ -12,40 +12,36 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+    . "$HOME/.bashrc"
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# set PATH so it includes dotfiles binary if it exists
 if [ -d "$HOME/.dotfiles/bin" ] ; then
     PATH="$HOME/.dotfiles/bin:$PATH"
 fi
 
-
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# cuda
 if [ -d "/usr/local/cuda/bin" ] ; then
     PATH=/usr/local/cuda/bin:${PATH}
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 fi
 
-# set editor to neovim
-export EDITOR="nvim"
+setopt +o nomatch # Don't print error if glob finds no matches
+for CONFIG_FILE in ~/.profile-external/*.sh; do
+	[ -e "$CONFIG_FILE" ] || continue
+	. $CONFIG_FILE
+done
+setopt -o nomatch
 
-# set clang as C and C++ compiler
-export CC="clang"
-export CXX="clang++"
 

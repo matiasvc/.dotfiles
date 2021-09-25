@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script symlinks all the config files to the right location.
 
-# Path of folder where this script is, which should be the .dotfiles folder
+# Path of folder where this script is, which should be the .dotfiles folder.
 DOTFILES=$(dirname $(realpath -s $0))
 
 # .profile setup
@@ -24,10 +24,12 @@ ln -s ${DOTFILES}/zsh/antigen.zsh ${HOME}/.zsh/antigen.zsh
 rm -f ${HOME}/.zsh/p10k.zsh
 ln -s ${DOTFILES}/zsh/p10k.zsh ${HOME}/.zsh/p10k.zsh
 
+rm -rf ${HOME}/zsh/external
+ln -s ${DOTFILES}/zsh/external ${HOME}/.zsh/external
+
 # nvim setup
-rm -f ${HOME}/.config/nvim/init.vim
-mkdir -p ${HOME}/.config/nvim
-ln -s ${DOTFILES}/nvim/init.vim ${HOME}/.config/nvim/init.vim
+rm -rf ${HOME}/.config/nvim/
+ln -s ${DOTFILES}/nvim ${HOME}/.config/nvim
 
 # git setup
 rm -f ${HOME}/.gitconfig
@@ -35,12 +37,16 @@ ln -s ${DOTFILES}/git/.gitconfig ${HOME}/.gitconfig
 
 # i3 setup
 rm -rf ${HOME}/.config/i3
-mkdir -p ${}
+mkdir -p ${HOME}/.config
 ln -s ${DOTFILES}/i3 ${HOME}/.config/i3
 
 # i3status setup
 rm -rf ${HOME}/.config/i3status
 ln -s ${DOTFILES}/i3status ${HOME}/.config/i3status
+
+# i3blocks setup
+rm -rf ${HOME}/.config/i3blocks
+ln -s ${DOTFILES}/i3blocks ${HOME}/.config/i3blocks
 
 # ranger setup
 rm -rf ${HOME}/.config/ranger
