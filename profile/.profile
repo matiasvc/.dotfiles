@@ -37,11 +37,9 @@ if [ -d "/usr/local/cuda/bin" ] ; then
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 fi
 
-setopt +o nomatch # Don't print error if glob finds no matches
 for CONFIG_FILE in ~/.profile-external/*.sh; do
 	[ -e "$CONFIG_FILE" ] || continue
 	. $CONFIG_FILE
 done
-setopt -o nomatch
 
 
