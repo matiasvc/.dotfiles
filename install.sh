@@ -44,6 +44,7 @@ sudo apt update
 # cifs-utils: utilities for mounting SMB/CIFS shares
 # w3m-img: display images in ranger
 # mosh: ssh alternative with better support for high latency or unstable connections
+# i3blocks: alternative i3 status bar
 sudo apt-get install -y \
 	build-essential \
 	wget curl \
@@ -62,7 +63,8 @@ sudo apt-get install -y \
 	gparted \
 	cifs-utils \
 	w3m-img \
-	mosh
+	mosh \
+	i3blocks
 
 # Install i3wm
 if [ ! -x "$(command -v i3)" ]; then
