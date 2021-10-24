@@ -12,3 +12,10 @@
 	required = true
 [init]
 	defaultBranch = master
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+
+[user]
+	name = Matias Christensen

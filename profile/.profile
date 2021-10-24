@@ -43,3 +43,4 @@ for CONFIG_FILE in ~/.profile-external/*.sh; do
 done
 
 
+if [ -e /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -24,11 +24,11 @@ ln -s ${DOTFILES}/zsh/antigen.zsh ${HOME}/.zsh/antigen.zsh
 rm -f ${HOME}/.zsh/p10k.zsh
 ln -s ${DOTFILES}/zsh/p10k.zsh ${HOME}/.zsh/p10k.zsh
 
-rm -rf ${HOME}/zsh/external
+rm -rf ${HOME}/.zsh/external
 ln -s ${DOTFILES}/zsh/external ${HOME}/.zsh/external
 
 # nvim setup
-rm -rf ${HOME}/.config/nvim/
+rm -rf ${HOME}/.config/nvim
 ln -s ${DOTFILES}/nvim ${HOME}/.config/nvim
 
 # git setup
@@ -39,10 +39,6 @@ ln -s ${DOTFILES}/git/.gitconfig ${HOME}/.gitconfig
 rm -rf ${HOME}/.config/i3
 mkdir -p ${HOME}/.config
 ln -s ${DOTFILES}/i3 ${HOME}/.config/i3
-
-# i3status setup
-rm -rf ${HOME}/.config/i3status
-ln -s ${DOTFILES}/i3status ${HOME}/.config/i3status
 
 # i3blocks setup
 rm -rf ${HOME}/.config/i3blocks

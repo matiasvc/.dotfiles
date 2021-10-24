@@ -226,7 +226,7 @@ fi
 
 # install tarsnap
 if [ ! -x "$(command -v tarsnap)" ]; then
-	echo "Would you like to install alacritty?"
+	echo "Would you like to install tarsnap?"
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
