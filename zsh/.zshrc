@@ -51,7 +51,7 @@ fi
 # TODO: Make this work even if repo is not checked out at the path ~/.dotfiles
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias i3config="${EDITOR} ~/.config/i3/config"
-alias nvimconfig="${EDITOR} ~/.config/nvim/init.vim"
+alias nvimconfig="${EDITOR} ~/.config/nvim/"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 
 setopt +o nomatch # Don't print error if glob finds no matches

@@ -55,6 +55,10 @@ ln -s ${DOTFILES}/ssh/config ${HOME}/.ssh/config
 
 # jupyter setup
 mkdir -p ${HOME}/.jupyter
-rm -rf ${HOME}/.jupyter/jupyter_notebook_config.py
+rm -f ${HOME}/.jupyter/jupyter_notebook_config.py
 ln -s ${DOTFILES}/jupyter/jupyter_notebook_config.py ${HOME}/.jupyter/
+
+# redshift setip
+rm -f ${HOME}/.config/redshift.conf
+ln -s ${DOTFILES}/redshift/redshift.conf ${HOME}/.config/redshift.conf
 
