@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ] || [ -z $2 ]; then
+	echo "Missing input and/or output folder parameters"
+	exit 1
+fi
+
+SOURCE_FOLDER_PATH=$1
+TARGET_FOLDER_PATH=$2
+
+if [ ! -d ${SOURCE_FOLDER_PATH} ]; then
+	echo "Error in source path: ${SOURCE_FOLDER_PATH}"
+	exit 1
+fi
+
+mkdir -p ${TARGET_FOLDER_PATH}
+
+for MP4_PATH in $(find $SOURCE_FOLDER_PATH -maxdepth 1 -name "*.MP4"); do
+	M4A_PATH=${MP4_PATH%.MP4}.M4A
+	MP4_FILE=$(basename -- "${MP4_PATH}")
+	M4A_FILE=$(basename -- "${M4A_PATH}")
+
+	if [ -f ${TARGET_FOLDER_PATH}/${MP4_FILE} ]; then
+		echo "Skipping. ${MP4_FILE} alread exist in target folder."
+	else
+		if [ -f "$M4A_PATH" ]; then
+			echo "Combining ${MP4_FILE} and ${M4A_FILE}"
+			ffmpeg -i ${MP4_PATH} -i ${M4A_PATH} -c copy ${TARGET_FOLDER_PATH}/${MP4_FILE}
+		else
+			echo "Unable to find ${M4A_FILE}. Copying ${MP4_FILE}"
+			cp -i -t ${TARGET_FOLDER_PATH} ${MP4_PATH}
+		fi
+	fi
+
+done
+

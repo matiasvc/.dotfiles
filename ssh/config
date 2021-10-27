@@ -1,8 +1,5 @@
 Include ~/.ssh/work_config
 
-Host 10.11.99.1
-	IdentityFile ~/.ssh/reMarkable
-
 Host github.com
 	HostName github.com
 	User git

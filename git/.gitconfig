@@ -1,21 +1,27 @@
 [core]
-	editor = nvim
+  editor = nvim
+
 [color]
 	diff = auto
 	status = auto
 	branch = auto
-	pager = true
+  pager = true
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-	required = true
+  required = true
+
 [init]
-	defaultBranch = master
+  defaultBranch = master
+
 [pull]
-	rebase = true
+  rebase = true
+
 [fetch]
-	prune = true
+  prune = true
 
 [user]
-	name = Matias Christensen
+  name = Matias Christensen
+
