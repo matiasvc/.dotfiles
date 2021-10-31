@@ -8,7 +8,7 @@ DOTFILES_PATH=$(dirname $(realpath -s $0))
 # The version of ubuntu that is running this script
 UBUNTU_CODENAME=`cat /etc/lsb-release | awk '/DISTRIB_CODENAME/ { CODENAME=$2} END {print CODENAME}' FS='='`
 
-if [[ "$UBUNTU_CODENAME" =~ ^(bionic) ]]; then
+if [[ "$UBUNTU_CODENAME" =~ ^(bionic|hirsute) ]]; then
 	echo "The machine is running Ubuntu ${UBUNTU_CODENAME}"
 else
 	echo "This script does not support ${UBUNTU_CODENAME}" > /dev/stderr

@@ -37,7 +37,10 @@ if [ -d "/usr/local/cuda/bin" ] ; then
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 fi
 
-for CONFIG_FILE in ~/.profile-external/*.sh; do
+PROFILE_EXTERNAL_PATH="${HOME}/.profile-external"
+CONFIG_FILES=$(find "${PROFILE_EXTERNAL_PATH}" -regex '.*.sh')
+
+for CONFIG_FILE in $CONFIG_FILES; do
 	[ -e "$CONFIG_FILE" ] || continue
 	. $CONFIG_FILE
 done
