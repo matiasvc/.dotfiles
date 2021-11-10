@@ -45,11 +45,10 @@ lsp_settings['pyright'] = {
   }
 }
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'clangd' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.on_server_ready(function(server)
+  local opts = {
     settings = lsp_settings[lsp],
     on_attach = on_attach,
     flags = {
@@ -57,7 +56,9 @@ for _, lsp in ipairs(servers) do
     },
     capabilities = capabilities,
   }
-end
+
+  server:setup(opts)
+end)
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

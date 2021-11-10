@@ -2,8 +2,7 @@
 require('core.settings')
 require('core.mappings')
 
-require('plugins')
+require('core.plugins')
 
 require('core.colorscheme')
-
 
