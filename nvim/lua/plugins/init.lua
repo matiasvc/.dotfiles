@@ -15,7 +15,7 @@ return packer.startup(
     -- Theme
     use 'marko-cerovac/material.nvim'
 
-    --- LSP
+    -- LSP
     use {
       'neovim/nvim-lspconfig',
       requires = {
@@ -49,6 +49,14 @@ return packer.startup(
       "Pocco81/AutoSave.nvim",
       config = function()
         require 'plugins.configs.autosave'
+      end
+    }
+
+    -- nvim-lspconfig
+    use {
+      "neovim/nvim-lspconfig",
+      config = function()
+        require 'plugins.configs.lspconfig'
       end
     }
 
