@@ -17,10 +17,12 @@ vim.o.tabstop = 2
 vim.o.smartindent = true
 vim.o.modeline = false
 
+
 vim.cmd('set colorcolumn=999')                      -- color column
 vim.wo.number = true                                -- line numbers
 vim.wo.relativenumber = true                        -- relative line numbers
-vim.wo.wrap = false                                 -- word wrapping
+vim.wo.wrap = true                                  -- word wrapping
+vim.wo.linebreak = true                             -- break at word boundary
 vim.wo.cursorline = true                            -- cursor line
 vim.o.incsearch = true                              -- incremental search
 vim.o.splitright = true                             -- split vertical windows right
