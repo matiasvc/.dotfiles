@@ -6,7 +6,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-
 return require('packer').startup(function(use)
   -- Packer
   use 'wbthomason/packer.nvim'
@@ -26,20 +25,23 @@ return require('packer').startup(function(use)
   -- Completion engine
   -- TODO: Configs for all of these
   use {
-      'hrsh7th/nvim-cmp',
-      requires = {
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-vsnip', -- Requires vim-vsnip
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-git',
-        'hrsh7th/cmp-calc',
-        'hrsh7th/cmp-emoji',
-        'hrsh7th/vim-vsnip',
-        'saadparwaiz1/cmp_luasnip', -- Requires LuaSnip
-        'L3MON4D3/LuaSnip'
-      }
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-vsnip', -- Requires vim-vsnip
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-git',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-emoji',
+      'hrsh7th/vim-vsnip',
+      'saadparwaiz1/cmp_luasnip', -- Requires LuaSnip
+      'L3MON4D3/LuaSnip'
+    },
+    config = function()
+      require 'plugins.nvim-cmp'
+    end
   }
 
   -- Treesitter
