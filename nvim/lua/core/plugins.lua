@@ -13,31 +13,46 @@ return require('packer').startup(function(use)
   -- Theme
   use 'marko-cerovac/material.nvim'
 
+  -- Utils
+  use 'tpope/vim-eunuch'
+
   -- LSP
   use {
     "neovim/nvim-lspconfig",
+    -- Config is done in nvim-lsp-installer
+  }
+
+  use {
     'williamboman/nvim-lsp-installer',
+    after = {'nvim-lspconfig', 'cmp-nvim-lsp'},
     config = function()
-      require 'plugins.lspconfig'
+      require 'plugins.nvim-lsp-installer'
     end
   }
 
-  -- Completion engine
-  -- TODO: Configs for all of these
+  -- Snippets
+  use {
+      'hrsh7th/vim-vsnip',
+      config = function()
+        require 'plugins.vim-vsnip'
+      end
+  }
+
+  -- Completion
   use {
     'hrsh7th/nvim-cmp',
+    after = 'vim-vsnip',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip', -- Requires vim-vsnip
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-git',
       'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
-      'hrsh7th/vim-vsnip',
-      'saadparwaiz1/cmp_luasnip', -- Requires LuaSnip
-      'L3MON4D3/LuaSnip'
+      'hrsh7th/cmp-look',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-omni',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-vsnip',
+      --'petertriho/cmp-git'
     },
     config = function()
       require 'plugins.nvim-cmp'
@@ -49,7 +64,7 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
-      require 'plugins.treesitter'
+      require 'plugins.nvim-treesitter'
     end
   }
 
@@ -58,14 +73,14 @@ return require('packer').startup(function(use)
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = function()
-      require 'plugins.autopairs'
+      require 'plugins.nvim-autopairs'
     end
   }
 
   -- Status line
   use {
     'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    requires = 'kyazdani42/nvim-web-devicons',
     event = 'BufWinEnter',
     config = function()
       require 'plugins.lualine'
@@ -75,17 +90,19 @@ return require('packer').startup(function(use)
   -- Buffer line
   use {
     'akinsho/bufferline.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    opt = true,
+    requires = 'kyazdani42/nvim-web-devicons',
     keys = { '<leader>sb' },
     config = function()
-      require 'plugin.bufferline'
+      require 'plugins.bufferline'
     end
   }
 
   -- Code outline
   use {
-     'simrat39/symbols-outline.nvim'
+     'simrat39/symbols-outline.nvim',
+     config = function()
+       require 'plugins.symbols-outline'
+     end
   }
 
   -- Telescope

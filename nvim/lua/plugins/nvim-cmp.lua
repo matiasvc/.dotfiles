@@ -2,11 +2,11 @@
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- luasnip setup
-local luasnip = require 'luasnip'
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
+
+cmp.register_source('look', require('cmp_look').new())
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -44,8 +44,21 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = 'calc' },
+    --{ name = 'emoji' },
+    --{ name = 'look' },
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    { name = 'nvim_lua' },
+    --{ name = 'omni' },
+    --{ name = 'vsnip' },
+    { name = 'path' },
+    --{ name = 'buffer' },
   },
 }
+
+require'cmp'.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
 
