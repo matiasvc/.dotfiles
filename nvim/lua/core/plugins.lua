@@ -44,15 +44,13 @@ return require('packer').startup(function(use)
     after = 'vim-vsnip',
     requires = {
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-look',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-omni',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip',
-      --'petertriho/cmp-git'
+      'hrsh7th/cmp-vsnip', -- Requires vim-vsnip
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-git',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-emoji',
+      'hrsh7th/vim-vsnip',
     },
     config = function()
       require 'plugins.nvim-cmp'
