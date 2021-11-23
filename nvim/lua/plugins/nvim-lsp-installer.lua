@@ -44,7 +44,8 @@ local lsp_settings = {}
 local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
   local opts = {
-    settings = lsp_settings[server.name],
+    --settings = lsp_settings[server.name],
+    settings = {},
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,

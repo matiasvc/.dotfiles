@@ -1,8 +1,13 @@
 Include ~/.ssh/work_config
 
 Host github.com
-	HostName github.com
-	User git
-	AddKeysToAgent yes
-	IdentityFile ~/.ssh/personal
+  HostName github.com
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/personal
+
+Host 64.227.112.109
+  HostName 64.227.112.109
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/personal
 

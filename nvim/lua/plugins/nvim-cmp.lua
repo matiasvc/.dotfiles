@@ -3,9 +3,7 @@
 vim.o.completeopt = 'menuone,noselect'
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
-
-cmp.register_source('look', require('cmp_look').new())
+local cmp = require('cmp')
 
 cmp.setup {
   snippet = {
@@ -53,10 +51,11 @@ cmp.setup {
     --{ name = 'vsnip' },
     { name = 'path' },
     --{ name = 'buffer' },
+    { name = 'look', keyword_length=2, option={convert_case=true, loud=true}},
   },
 }
 
-require'cmp'.setup.cmdline(':', {
+cmp.setup.cmdline(':', {
   sources = {
     { name = 'cmdline' }
   }

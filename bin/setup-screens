@@ -2,20 +2,15 @@
 
 HOSTNAME=`hostname`
 
+LG43_DPI=102
+PHILIPS32_DPI=92
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
-	DPI=92
-	xrandr --output HDMI-0 --auto --dpi $DPI
-	xrandr --output HDMI-1 --auto --right-of HDMI-0
-elif [ $HOSTNAME = "oslh-00016-d" ]; then
-	echo "setup-screens: Work Mode (Desktop)"
-	xrandr --output DP-2 --auto
-	xrandr --output DP-0 --auto --left-of DP-2
-elif [ $HOSTNAME = "oslh-00152-l" ]; then
-	echo "setup-screens: Work Mode (Laptop)"
-	xrandr --output eDP-1-1 --auto
-	xrandr --output HDMI-0 --auto --right-of eDP-1-1
+  xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --primary --mode 3840x2160 --pos 1440x200 --rotate normal --output DP-2 --off --output DP-3 --mode 2560x1440 --pos 0x0 --rotate left --output DP-4 --off --output DP-5 --mode 2560x1440 --pos 5280x0 --rotate left --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/DP-3 --dpi ${PHILIPS32_DPI}/DP-5
+  notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiasvc-macbook" ]; then
-	DPI=220
-	xrandr --output DP-2 --auto --dpi $DPI
+  DPI=220
+  xrandr --output DP-2 --auto --dpi $DPI
+else
+  notify-send "Unknown screen layout for ${HOSTNAME}"
 fi
 

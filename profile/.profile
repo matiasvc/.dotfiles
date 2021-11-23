@@ -37,6 +37,15 @@ if [ -d "/usr/local/cuda/bin" ] ; then
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 fi
 
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib64
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib32
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib64
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib32
+
+
 PROFILE_EXTERNAL_PATH="${HOME}/.profile-external"
 CONFIG_FILES=$(find "${PROFILE_EXTERNAL_PATH}" -regex '.*.sh')
 
