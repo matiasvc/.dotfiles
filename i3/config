@@ -184,10 +184,6 @@ exec --no-startup-id unclutter
 
 exec_always --no-startup-id feh --bg-fill ${HOME}/.dotfiles/wallpapers/wallhaven-nmok11.jpg
 
-
-# Monitors
-bindsym $mod+Shift+s exec ${HOME}/.dotfiles/bin/switch-screens
-
 # Keyboard Layout
 set $keyboard_layout Keyboard Layout: (n) Norwegian, (e) US English
 mode "$keyboard_layout" {

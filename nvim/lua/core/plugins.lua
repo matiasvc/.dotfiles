@@ -135,14 +135,12 @@ return require('packer').startup(function(use)
   ]]--
 
   -- Code outline
-  --[[
   use {
      'simrat39/symbols-outline.nvim',
      config = function()
        require 'plugins.symbols-outline'
      end
   }
-  ]]--
 
   -- Telescope
   --[[

@@ -8,7 +8,7 @@ local cmp = require('cmp')
 cmp.setup {
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
@@ -25,8 +25,6 @@ cmp.setup {
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -34,8 +32,6 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -51,7 +47,7 @@ cmp.setup {
     --{ name = 'vsnip' },
     { name = 'path' },
     --{ name = 'buffer' },
-    { name = 'look', keyword_length=2, option={convert_case=true, loud=true}},
+    --{ name = 'look', keyword_length=2, option={convert_case=true, loud=true}},
   },
 }
 
