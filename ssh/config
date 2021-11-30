@@ -1,6 +1,6 @@
-Include ~/.ssh/work_config
+Include ~/.ssh/config-work
 
-Host github.com
+Host github-personal
   HostName github.com
   User git
   AddKeysToAgent yes
