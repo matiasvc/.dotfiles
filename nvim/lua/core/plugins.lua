@@ -116,7 +116,6 @@ return require('packer').startup(function(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    event = 'BufWinEnter',
     config = function()
       require 'plugins.lualine'
     end
@@ -134,30 +133,16 @@ return require('packer').startup(function(use)
   }
   ]]--
 
-  -- Code outline
-  use {
-     'simrat39/symbols-outline.nvim',
-     config = function()
-       require 'plugins.symbols-outline'
-     end
-  }
-
   -- Telescope
-  --[[
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim',
-      'nvim-telescope/telescope-media-files.nvim',
     },
-    event = 'UIEnter',
     config = function()
       require 'plugins.telescope'
     end
   }
-  ]]--
 
   -- Autosave
   use {

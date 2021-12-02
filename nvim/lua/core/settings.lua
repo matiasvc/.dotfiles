@@ -16,6 +16,7 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.smartindent = true
 vim.o.modeline = false
+vim.o.autochdir = false
 
 
 vim.cmd('set colorcolumn=999')                      -- color column
