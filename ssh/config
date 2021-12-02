@@ -1,10 +1,11 @@
 Include ~/.ssh/config-work
 
-Host github-personal
+Host github.com
   HostName github.com
   User git
   AddKeysToAgent yes
   IdentityFile ~/.ssh/personal
+  IdentityFile /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
 
 Host 64.227.112.109
   HostName 64.227.112.109
