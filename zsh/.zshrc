@@ -55,6 +55,9 @@ alias i3config="${EDITOR} ~/.config/i3/config"
 alias nvimconfig="${EDITOR} ~/.config/nvim/"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 
+# git commit lazy
+alias gclz='git commit -m "$(date)"'
+
 setopt +o nomatch # Don't print error if glob finds no matches
 for CONFIG_FILE in ~/.zsh/external/*.zsh; do
 	[ -e "$CONFIG_FILE" ] || continue
