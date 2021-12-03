@@ -14,6 +14,7 @@ antigen bundle git
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle jeffreytse/zsh-vi-mode
 
 antigen theme romkatv/powerlevel10k
 
@@ -61,7 +62,8 @@ for CONFIG_FILE in ~/.zsh/external/*.zsh; do
 done
 setopt -o nomatch
 
+if [ -e /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
 
-if [ -e /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
