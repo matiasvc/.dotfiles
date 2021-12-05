@@ -5,7 +5,15 @@ HOSTNAME=`hostname`
 LG43_DPI=102
 PHILIPS32_DPI=92
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
-  xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --primary --mode 3840x2160 --pos 1440x200 --rotate normal --output DP-2 --off --output DP-3 --mode 2560x1440 --pos 0x0 --rotate left --output DP-4 --off --output DP-5 --mode 2560x1440 --pos 5280x0 --rotate left --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/DP-3 --dpi ${PHILIPS32_DPI}/DP-5
+  xrandr \
+    --output DP-1 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
+    --output DP-3 --mode 2560x1440 --pos 0x0 --rotate left \
+    --output DP-5 --mode 2560x1440 --pos 5280x0 --rotate left \
+    --output HDMI-0 --off \
+    --output DP-0 --off \
+    --output DP-2 --off \
+    --output DP-4 --off \
+    --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/DP-3 --dpi ${PHILIPS32_DPI}/DP-5
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiasvc-macbook" ]; then
   DPI=220

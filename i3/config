@@ -181,8 +181,7 @@ exec --no-startup-id expandrive
 exec --no-startup-id redshift-gtk
 exec --no-startup-id discord
 exec --no-startup-id unclutter --timeout 3 --jitter 25
-
-exec_always --no-startup-id feh --bg-fill ${HOME}/.dotfiles/wallpapers/wallhaven-nmok11.jpg
+exec-aways --no-startup-id refresh-wallpaper
 
 # Keyboard Layout
 set $keyboard_layout Keyboard Layout: (n) Norwegian, (e) US English
