@@ -62,3 +62,7 @@ ln -s ${DOTFILES}/jupyter/jupyter_notebook_config.py ${HOME}/.jupyter/
 rm -f ${HOME}/.config/redshift.conf
 ln -s ${DOTFILES}/redshift/redshift.conf ${HOME}/.config/redshift.conf
 
+# udev rules
+sudo rm -f /etc/udev/rules.d/90-brightnessctl.rules
+sudo ln -s ${DOTFILES}/udev/90-brightnessctl.rules /etc/udev/rules.d/
+

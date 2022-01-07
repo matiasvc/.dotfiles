@@ -152,6 +152,17 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Comments
+  use {
+    "numToStr/Comment.nvim",
+    config = function()
+      require('Comment').setup()
+    end
+  }
+
+  -- CMake
+  use "cdelledonne/vim-cmake"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

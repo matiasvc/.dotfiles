@@ -4,6 +4,8 @@ local map = require('core.functions').map
 map('n', '<Space>', '<NOP>')
 vim.g.mapleader = ' '
 
+map('v', '.', ':norm.<CR>')
+
 -- Telescope finder
 map('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]])
 map('n', '<leader>fe', [[<cmd>lua require('telescope.builtin').file_browser({hidden=true})<CR>]])

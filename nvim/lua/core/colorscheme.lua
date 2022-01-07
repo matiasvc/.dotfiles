@@ -19,7 +19,8 @@ require('material').setup({
 		background = false,
 		term_colors = false,
 		eob_lines = true
-	}
+	},
+  custom_highlights = {}
 })
 
 -- Enable the colorscheme
