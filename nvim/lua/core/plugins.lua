@@ -50,6 +50,7 @@ return require('packer').startup(function(use)
 
   -- Utils
   use 'tpope/vim-eunuch'
+  use 'tpope/vim-commentary'
 
   -- LSP
   use {
@@ -133,6 +134,11 @@ return require('packer').startup(function(use)
   }
   ]]--
 
+  -- Aerial
+  use {
+    'stevearc/aerial.nvim'
+  }
+
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
@@ -162,6 +168,30 @@ return require('packer').startup(function(use)
 
   -- CMake
   use "cdelledonne/vim-cmake"
+
+  -- Git
+  use {
+    'tanvirtin/vgit.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('vgit').setup()
+    end
+  }
+
+  -- GitHub
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

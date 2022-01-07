@@ -54,11 +54,11 @@ fi
 # TODO: Make this work even if repo is not checked out at the path ~/.dotfiles
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias i3config="${EDITOR} ~/.config/i3/config"
-alias nvimconfig="${EDITOR} ~/.config/nvim/"
+alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 
 # git commit lazy
-alias gclz='git commit -m "$(date)"'
+alias gslz='git commit -m "$(date)" && git push'
 
 setopt +o nomatch # Don't print error if glob finds no matches
 for CONFIG_FILE in ~/.zsh/external/*.zsh; do

@@ -17,5 +17,4 @@ map('n', '<leader>fa', [[<cmd>lua require('telescope.builtin').lsp_code_actions(
 map('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').vim_options()<CR>]])
 map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]])
 map('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').man_pages()<CR>]])
-map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').colorscheme()<CR>]])
-
+map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').treesitter()<CR>]])

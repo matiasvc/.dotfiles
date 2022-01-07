@@ -6,6 +6,7 @@ vim.o.writebackup = false                           -- writing backup file
 vim.o.autochdir = true                              -- change directory
 vim.o.encoding = "UTF-8"                            -- encoding
 vim.o.clipboard = "unnamedplus"                     -- clipboard
+vim.o.exrc = true                                   -- load project specific config files
 
 vim.o.smarttab = true                               -- smart tabs
 vim.o.expandtab = true                              -- expand tabs to spaces
