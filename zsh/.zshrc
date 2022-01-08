@@ -58,7 +58,7 @@ alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 
 # git commit lazy
-alias gslz='git commit -m "$(date)" && git push'
+alias gclz='git commit -m "$(date)"'
 
 setopt +o nomatch # Don't print error if glob finds no matches
 for CONFIG_FILE in ~/.zsh/external/*.zsh; do
