@@ -130,7 +130,12 @@ return require('packer').startup(function(use)
   }
 
   -- CMake
-  use "cdelledonne/vim-cmake"
+  use {
+    "cdelledonne/vim-cmake",
+    config = function()
+      require 'plugins.vim-cmake'
+    end
+  }
 
   -- Git
   -- use {

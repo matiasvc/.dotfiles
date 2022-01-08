@@ -5,7 +5,7 @@ RW_PATH="/tmp/refresh-wallpaper"
 rm -rf $RW_PATH
 mkdir -p $RW_PATH
 
-curl -s --location --header 'Authorization: Client-ID mKhbkWGClHYBQk1uURz5-gf2sc5tVIXQNaQWQxDSy08' --request GET 'api.unsplash.com/photos/random?query=abstract&orientation=landscape&count=30' >> $RW_PATH/unsplash.json
+curl -s --location --header 'Authorization: Client-ID mKhbkWGClHYBQk1uURz5-gf2sc5tVIXQNaQWQxDSy08' --request GET 'api.unsplash.com/photos/random?query=nature&orientation=landscape&count=30' >> $RW_PATH/unsplash.json
 
 IMAGE_URL="$(cat ${RW_PATH}/unsplash.json | jq -r 'sort_by(.width * .height)[-1].urls.full')"
 IMAGE_URL="$(cat ${RW_PATH}/unsplash.json | jq -r 'map(select(.width >= 6720 and .height >= 2560)) | sort_by(.likes)[-1].urls.raw')"
