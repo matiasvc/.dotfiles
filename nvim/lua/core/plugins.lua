@@ -129,6 +129,14 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Scrollbar
+  use {
+    "petertriho/nvim-scrollbar",
+    config = function()
+      require("scrollbar").setup()
+    end
+  }
+
   -- CMake
   use {
     "cdelledonne/vim-cmake",
