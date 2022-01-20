@@ -33,10 +33,13 @@ return require('packer').startup(function(use)
 
   -- Snippets
   use {
-      'hrsh7th/vim-vsnip',
-      config = function()
-        require 'plugins.vim-vsnip'
-      end
+    'hrsh7th/vim-vsnip',
+    config = function()
+      require 'plugins.vim-vsnip'
+    end
+  }
+  use {
+    'hrsh7th/vim-vsnip-integ'
   }
 
   -- Completion
@@ -137,6 +140,14 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Smooth scrolling
+  use {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup()
+    end
+  }
+
   -- CMake
   use {
     "cdelledonne/vim-cmake",
@@ -144,6 +155,7 @@ return require('packer').startup(function(use)
       require 'plugins.vim-cmake'
     end
   }
+
 
   -- Git
   -- use {

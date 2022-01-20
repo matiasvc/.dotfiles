@@ -8,6 +8,7 @@ vim.o.encoding = "UTF-8"                            -- encoding
 vim.o.clipboard = "unnamedplus"                     -- clipboard
 vim.o.exrc = true                                   -- load project specific config files
 vim.g.signcolumn = 2
+vim.o.colorcolumn = '100'
 
 vim.o.smarttab = true                               -- smart tabs
 vim.o.expandtab = true                              -- expand tabs to spaces
@@ -21,7 +22,6 @@ vim.o.modeline = false
 vim.o.autochdir = false
 
 
-vim.cmd('set colorcolumn=999')                      -- color column
 vim.wo.number = true                                -- line numbers
 vim.wo.relativenumber = true                        -- relative line numbers
 vim.wo.wrap = true                                  -- word wrapping
