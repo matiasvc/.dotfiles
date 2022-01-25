@@ -11,3 +11,7 @@ Host 64.227.112.109
   AddKeysToAgent yes
   IdentityFile ~/.ssh/personal
 
+Host remarkable 10.11.99.1
+  User root
+  Hostname 10.11.99.1
+  IdentityFile ~/.ssh/remarkable
