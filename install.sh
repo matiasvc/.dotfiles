@@ -30,7 +30,6 @@ sudo apt update
 # xautoloc: auto password lock
 # htop, nmon & bmon: system monitora
 # ffmpeg: video codec and converter
-# ffmpegthumbnailer: used by ranger for video thumbnails
 # cmake: build system
 # ninja-build: build system
 # vlc: video player
@@ -42,7 +41,6 @@ sudo apt update
 # nfs-common: for acessing synology drive
 # imagemagick: image utilities
 # cifs-utils: utilities for mounting SMB/CIFS shares
-# w3m-img: display images in ranger
 # mosh: ssh alternative with better support for high latency or unstable connections
 # i3blocks: alternative i3 status bar
 sudo apt-get install -y \
@@ -53,7 +51,6 @@ sudo apt-get install -y \
   xautolock \
   htop nmon bmon \
   ffmpeg \
-  ffmpegthumbnailer \
   cmake cmake-doc \
   ninja-build \
   vlc \
@@ -62,7 +59,6 @@ sudo apt-get install -y \
   ncdu \
   gparted \
   cifs-utils \
-  w3m-img \
   mosh \
   i3blocks \
   unclutter-xfixes
@@ -157,28 +153,6 @@ if [ ! -d "${HOME}/.fzf" ]; then
   done
 else
   echo ">>>> fzf is already installed <<<<"
-fi
-
-# install ranger
-if [ ! -x "$(command -v ranger)" ]; then
-  echo "Would you like to install ranger?"
-  select yn in "Yes" "No"; do
-    case $yn in
-      Yes )
-        echo ">>>> Installing ranger <<<<"
-        RANGER_VERSION='1.9.3'
-        git clone --depth 1 --branch v${RANGER_VERSION} https://github.com/ranger/ranger.git /tmp/ranger
-        sudo apt update && sudo apt install -y python python3 # Install requirements
-        # TODO: Look at other relevant ranger preview programs
-        sudo make -C /tmp/ranger/ install
-        break;;
-      No )
-        echo "Skipping fzf"
-        break;;
-    esac
-  done
-else
-  echo ">>>> ranger is already installed <<<<"
 fi
 
 # install neovim
