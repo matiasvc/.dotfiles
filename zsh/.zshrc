@@ -52,6 +52,7 @@ fi
 # aliases
 
 # TODO: Make this work even if repo is not checked out at the path ~/.dotfiles
+alias termconfig="${EDITOR} ~/.dotfiles/alacritty/alacritty.yml"
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias i3config="${EDITOR} ~/.config/i3/config"
 alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
