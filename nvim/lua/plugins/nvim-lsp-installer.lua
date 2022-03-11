@@ -1,5 +1,3 @@
-local nvim_lsp = require('lspconfig')
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -41,7 +39,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lsp_settings = {}
 lsp_settings['pyright'] = {
   python = {
-    pythonPath = "/home/skydio/aircam/build/host_aircam/bin/mc_python"
+    pythonPath = "mc_python"
   }
 }
 

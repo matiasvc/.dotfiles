@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# kill redshift to stop it from reverting the brightness while in focus mode
+killall redshift
+
+xrandr --output DP-0 --gamma 0.9:0.9:0.9 --brightness 1.0 \
+       --output DP-2 --brightness 0.0 \
+       --output DP-4 --brightness 0.0

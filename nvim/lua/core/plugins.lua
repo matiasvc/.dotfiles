@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
   -- Utils
   use 'tpope/vim-eunuch'
   use 'tpope/vim-commentary'
+  use 'tpope/vim-obsession'
 
   -- LSP
   use {
@@ -158,15 +159,15 @@ return require('packer').startup(function(use)
 
 
   -- Git
-  -- use {
-  --   'tanvirtin/vgit.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim'
-  --   },
-  --   config = function()
-  --     require('vgit').setup()
-  --   end
-  -- }
+  use {
+    'tanvirtin/vgit.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('vgit').setup()
+    end
+  }
 
   -- GitHub
   -- use {

@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+ANKI_NOHIGHDPI=1 anki
