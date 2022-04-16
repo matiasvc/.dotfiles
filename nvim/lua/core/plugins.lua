@@ -1,12 +1,14 @@
+local execute = vim.api.nvim_command
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 -- Ensure packer is installed
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
 end
 
-return require('packer').startup(function(use)
+return require('packer').startup{function(use)
   -- Packer
   use 'wbthomason/packer.nvim'
 
@@ -15,52 +17,66 @@ return require('packer').startup(function(use)
 
   -- Utils
   use 'tpope/vim-eunuch'
-  use 'tpope/vim-commentary'
   use 'tpope/vim-obsession'
 
   -- LSP
   use {
     "neovim/nvim-lspconfig",
-    -- Config is done in nvim-lsp-installer
+    config = function()
+      require 'plugins.nvim-lspconfig'
+    end
   }
-
+  
+  -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
-    --after = {'nvim-lspconfig', 'cmp-nvim-lsp'},
     config = function()
       require 'plugins.nvim-lsp-installer'
     end
   }
 
-  -- Snippets
+  -- LSP Pictograms
   use {
-    'hrsh7th/vim-vsnip',
+    'onsails/lspkind-nvim',
     config = function()
-      require 'plugins.vim-vsnip'
+      require 'plugins.lspkind-nvim'
     end
   }
+
+  -- LSP Status
   use {
-    'hrsh7th/vim-vsnip-integ'
+    'nvim-lua/lsp-status.nvim',
+    config = function()
+      require 'plugins.lsp-status-nvim'
+    end
   }
 
   -- Completion
   use {
     'hrsh7th/nvim-cmp',
-    after = 'vim-vsnip',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-vsnip', -- Requires vim-vsnip
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-git',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-emoji',
-      'hrsh7th/vim-vsnip',
-      'octaltree/cmp-look',
+      'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
+      'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
+      'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
+      'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
+      'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
+      'hrsh7th/cmp-git',          -- nvim-cmp source for git
+      'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
+      'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
     },
     config = function()
       require 'plugins.nvim-cmp'
+    end
+  }
+
+  -- Snippets
+  use {
+    'L3MON4D3/LuaSnip',
+    requires = {
+      "rafamadriz/friendly-snippets",   -- Snippets collection
+    },
+    config = function()
+      require 'plugins.luasnip'
     end
   }
 
@@ -74,13 +90,13 @@ return require('packer').startup(function(use)
   }
 
   -- Autopairs
-  use {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = function()
-      require 'plugins.nvim-autopairs'
-    end
-  }
+  -- use {
+  --   'windwp/nvim-autopairs',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require 'plugins.nvim-autopairs'
+  --   end
+  -- }
 
   -- Status line
   -- use {
@@ -102,20 +118,20 @@ return require('packer').startup(function(use)
   -- }
 
   -- Aerial
-  use {
-    'stevearc/aerial.nvim'
-  }
+  -- use {
+  --   'stevearc/aerial.nvim'
+  -- }
 
   -- Telescope
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-    },
-    config = function()
-      require 'plugins.telescope'
-    end
-  }
+  -- use {
+  --   'nvim-telescope/telescope.nvim',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim',
+  --   },
+  --   config = function()
+  --     require 'plugins.telescope'
+  --   end
+  -- }
 
   -- Autosave
   use {
@@ -134,40 +150,40 @@ return require('packer').startup(function(use)
   }
 
   -- Scrollbar
-  use {
-    "petertriho/nvim-scrollbar",
-    config = function()
-      require("scrollbar").setup()
-    end
-  }
+  -- use {
+  --   "petertriho/nvim-scrollbar",
+  --   config = function()
+  --     require("scrollbar").setup()
+  --   end
+  -- }
 
   -- Smooth scrolling
-  use {
-    'karb94/neoscroll.nvim',
-    config = function()
-      require 'plugins.neoscroll'
-    end
-  }
+  -- use {
+  --   'karb94/neoscroll.nvim',
+  --   config = function()
+  --     require 'plugins.neoscroll'
+  --   end
+  -- }
 
   -- CMake
-  use {
-    "cdelledonne/vim-cmake",
-    config = function()
-      require 'plugins.vim-cmake'
-    end
-  }
+  -- use {
+  --   "cdelledonne/vim-cmake",
+  --   config = function()
+  --     require 'plugins.vim-cmake'
+  --   end
+  -- }
 
 
   -- Git
-  use {
-    'tanvirtin/vgit.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    },
-    config = function()
-      require('vgit').setup()
-    end
-  }
+  -- use {
+  --   'tanvirtin/vgit.nvim',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim'
+  --   },
+  --   config = function()
+  --     require('vgit').setup()
+  --   end
+  -- }
 
   -- GitHub
   -- use {
@@ -182,11 +198,9 @@ return require('packer').startup(function(use)
   --   end
   -- }
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
 
-end)
-
+end, config = {
+  -- Move to lua dir so impatient.nvim can cache it
+  compile_path = vim.fn.stdpath('config')..'/plugin/packer_compiled.lua'
+  }
+}
