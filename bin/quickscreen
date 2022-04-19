@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# A simple utility to launch `gnome-screenshot` in interactive mode from dmenu
+echo "window\narea" | dmenu -i | xargs -I {} gnome-screenshot --"{}"
+nautilus ~/Pictures &
+
