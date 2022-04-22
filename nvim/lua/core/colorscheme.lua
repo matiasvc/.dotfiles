@@ -1,6 +1,8 @@
 -- Set the theme style
 vim.g.material_style = 'deep ocean'
 
+local colors = require('material.colors')
+
 require('material').setup({
 
   contrast = {
@@ -39,9 +41,11 @@ require('material').setup({
     eob_lines = false -- Hide the end-of-buffer lines
   },
 
-  custom_highlights = {} -- Overwrite highlights with your own
+  -- Overwrite highlights with your own
+  custom_highlights = {
+    TreesitterContext = { bg = colors.selection }
+  }
 })
-
 
 -- Enable the colorscheme
 vim.cmd[[colorscheme material]]

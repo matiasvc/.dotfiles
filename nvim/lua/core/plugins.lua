@@ -18,6 +18,9 @@ return require('packer').startup{function(use)
   -- Utils
   use 'tpope/vim-eunuch'
   use 'tpope/vim-obsession'
+  use 'tpope/vim-surround'
+  -- Temporary until bug in `numToStr/Comment.nvim` gets fixed
+  use 'tpope/vim-commentary'
 
   -- LSP
   use {
@@ -89,6 +92,15 @@ return require('packer').startup{function(use)
     end
   }
 
+  -- Context
+  use {
+    'lewis6991/nvim-treesitter-context',
+    after = 'nvim-treesitter',
+    config = function()
+      require 'plugins.nvim-treesitter-context'
+    end
+  }
+
   -- Autopairs
   -- use {
   --   'windwp/nvim-autopairs',
@@ -142,12 +154,14 @@ return require('packer').startup{function(use)
   }
 
   -- Comments
+  --[[
   use {
     "numToStr/Comment.nvim",
     config = function()
       require('Comment').setup()
     end
   }
+  ]]
 
   -- Scrollbar
   -- use {
