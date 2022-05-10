@@ -123,15 +123,15 @@ return require('packer').startup{function(use)
   -- }
 
   -- Telescope
-  -- use {
-  --   'nvim-telescope/telescope.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim',
-  --   },
-  --   config = function()
-  --     require 'plugins.telescope'
-  --   end
-  -- }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      require 'plugins.telescope'
+    end
+  }
 
   -- Autosave
   use {

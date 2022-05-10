@@ -4,6 +4,7 @@ HOSTNAME=`hostname`
 
 LG43_DPI=102
 PHILIPS32_DPI=92
+PRECISION5550=145
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
   xrandr \
     --output DP-1 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
@@ -26,9 +27,14 @@ elif [ $HOSTNAME = "matiaschristensen-norway" ]; then
     --output DP-5 --off \
     --dpi ${LG43_DPI}/DP-2 --dpi ${PHILIPS32_DPI}/DP-0 --dpi ${PHILIPS32_DPI}/DP-4
   notify-send "Screen layout set for ${HOSTNAME}"
-elif [ $HOSTNAME = "matiasvc-macbook" ]; then
-  DPI=220
-  xrandr --output DP-2 --auto --dpi $DPI
+elif [ $HOSTNAME = "matiaschristensen-laptop" ]; then
+  xrandr \
+    --output eDP-1-1 --mode 1920x1200 --pos 0x0 --rotate normal --primary \
+    --output DP-1-1 --off \
+    --output DP-1-2 --off \
+    --output DP-1-3 --off \
+    --dpi ${PRECISION5550}/eDP-1-1
+  notify-send "Screen layout set for ${HOSTNAME}"
 else
   notify-send "Unknown screen layout for ${HOSTNAME}"
 fi
