@@ -19,3 +19,5 @@ map('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').current_buffer_fu
 map('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').man_pages()<CR>]])
 map('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').treesitter()<CR>]])
 map('n', '<leader>fu', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]])
+
+map('n', '<leader>s', [[:ClangdSwitchSourceHeader<CR>]])
