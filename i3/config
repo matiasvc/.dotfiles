@@ -199,8 +199,8 @@ bindsym $mod+shift+Z mode "$keyboard_layout"
 bindsym XF86AudioRaiseVolume exec amixer -q set Master playback 5%+ unmute; exec notify-send "Volume Up"
 bindsym XF86AudioLowerVolume exec amixer -q set Master playback 5%- unmute; exec notify-send "Volume Down"
 
-bindsym XF86MonBrightnessUp exec macbook-lighter-screen --inc 5; exec notify-send "Screen Brightness Up"
-bindsym XF86MonBrightnessDown exec macbook-lighter-screen --dec 5; exec notify-send "Screen Brightness Down"
+bindsym XF86MonBrightnessUp exec set-brightness +
+bindsym XF86MonBrightnessDown exec set-brightness -
 
 bindsys XF86KbdBrightnessUp exec macbook-lighter-kbd --inc 25; exec notify-send "Keyboard Backlight Up"
 bindsys XF86KbdBrightnessDown exec macbook-lighter-kbd --dec 25; exec notify-send "Kayboard Backlight Down"
