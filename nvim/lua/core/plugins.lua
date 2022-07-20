@@ -19,8 +19,6 @@ return require('packer').startup{function(use)
   use 'tpope/vim-eunuch'
   use 'tpope/vim-obsession'
   use 'tpope/vim-surround'
-  -- Temporary until bug in `numToStr/Comment.nvim` gets fixed
-  use 'tpope/vim-commentary'
 
   -- LSP
   use {
@@ -101,6 +99,16 @@ return require('packer').startup{function(use)
     end
   }
 
+  -- TabNine
+  use {
+    'tzachar/cmp-tabnine',
+    run='./install.sh',
+    requires = 'hrsh7th/nvim-cmp',
+    config = function ()
+      require 'plugins.cmp-tabnine'
+    end
+  }
+
   -- Autopairs
   -- use {
   --   'windwp/nvim-autopairs',
@@ -154,14 +162,12 @@ return require('packer').startup{function(use)
   }
 
   -- Comments
-  --[[
   use {
-    "numToStr/Comment.nvim",
+    "terrortylor/nvim-comment",
     config = function()
-      require('Comment').setup()
+      require('nvim_comment').setup()
     end
   }
-  ]]
 
   -- Scrollbar
   -- use {
@@ -189,15 +195,15 @@ return require('packer').startup{function(use)
 
 
   -- Git
-  -- use {
-  --   'tanvirtin/vgit.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim'
-  --   },
-  --   config = function()
-  --     require('vgit').setup()
-  --   end
-  -- }
+  use {
+    'tanvirtin/vgit.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('vgit').setup()
+    end
+  }
 
   -- GitHub
   -- use {
@@ -212,6 +218,10 @@ return require('packer').startup{function(use)
   --   end
   -- }
 
+  -- use {
+  --   "luukvbaal/nnn.nvim",
+  --   config = function() require("nnn").setup() end
+  -- }
 
 end, config = {
   -- Move to lua dir so impatient.nvim can cache it

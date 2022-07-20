@@ -1,11 +1,14 @@
 Include ~/.ssh/config-work
 
-Host github.com
+Host github.com-personal
   Hostname github.com
   User git
   AddKeysToAgent yes
   IdentityFile ~/.ssh/personal
 
+Host github.com
+  HostName github.com
+  User git
 Host 64.227.112.109
   HostName 64.227.112.109
   AddKeysToAgent yes
@@ -14,4 +17,5 @@ Host 64.227.112.109
 Host remarkable 10.11.99.1
   User root
   Hostname 10.11.99.1
+  AddKeysToAgent yes
   IdentityFile ~/.ssh/remarkable
