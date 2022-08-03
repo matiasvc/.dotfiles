@@ -100,14 +100,14 @@ return require('packer').startup{function(use)
   }
 
   -- TabNine
-  use {
-    'tzachar/cmp-tabnine',
-    run='./install.sh',
-    requires = 'hrsh7th/nvim-cmp',
-    config = function ()
-      require 'plugins.cmp-tabnine'
-    end
-  }
+  -- use {
+  --   'tzachar/cmp-tabnine',
+  --   run='./install.sh',
+  --   requires = 'hrsh7th/nvim-cmp',
+  --   config = function ()
+  --     require 'plugins.cmp-tabnine'
+  --   end
+  -- }
 
   -- Autopairs
   -- use {
