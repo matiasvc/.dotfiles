@@ -25,6 +25,7 @@ if [ -f "$archive" ] ; then
 		*.tar.bz2|*.tbz2|*.tbz) tar xvjf "$archive" ;;
 		*.tar.xz) tar xvJf "$archive" ;;
 		*.tar.gz|*.tgz) tar xvzf "$archive" ;;
+		*.tar.zst) tar --use-compress-program=unzstd -xvf "$archive" ;;
 		*.lzma) unlzma "$archive" ;;
 		*.bz2) bunzip2 "$archive" ;;
 		*.rar) unrar x -ad "$archive" ;;
