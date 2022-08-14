@@ -156,8 +156,9 @@ return require('packer').startup{function(use)
   -- Autosave
   use {
     "Pocco81/AutoSave.nvim",
+    branch = "dev",
     config = function()
-      require 'plugins.autosave'
+      require("auto-save").setup {}
     end
   }
 
@@ -222,6 +223,14 @@ return require('packer').startup{function(use)
   --   "luukvbaal/nnn.nvim",
   --   config = function() require("nnn").setup() end
   -- }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end
+  }
 
 end, config = {
   -- Move to lua dir so impatient.nvim can cache it
