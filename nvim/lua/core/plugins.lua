@@ -64,20 +64,11 @@ return require('packer').startup{function(use)
       'hrsh7th/cmp-git',          -- nvim-cmp source for git
       'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
       'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
     },
     config = function()
       require 'plugins.nvim-cmp'
-    end
-  }
-
-  -- Snippets
-  use {
-    'L3MON4D3/LuaSnip',
-    requires = {
-      "rafamadriz/friendly-snippets",   -- Snippets collection
-    },
-    config = function()
-      require 'plugins.luasnip'
     end
   }
 

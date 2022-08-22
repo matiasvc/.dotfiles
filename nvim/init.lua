@@ -6,3 +6,5 @@ require('core.plugins')
 
 require('core.colorscheme')
 
+require('varnum.globals')
+
