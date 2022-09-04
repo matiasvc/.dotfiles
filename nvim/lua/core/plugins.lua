@@ -27,7 +27,7 @@ return require('packer').startup{function(use)
       require 'plugins.nvim-lspconfig'
     end
   }
-  
+
   -- LSP Installer
   use {
     'williamboman/nvim-lsp-installer',
@@ -162,29 +162,20 @@ return require('packer').startup{function(use)
   }
 
   -- Scrollbar
-  -- use {
-  --   "petertriho/nvim-scrollbar",
-  --   config = function()
-  --     require("scrollbar").setup()
-  --   end
-  -- }
+  use {
+    "petertriho/nvim-scrollbar",
+    config = function()
+      require("scrollbar").setup()
+    end
+  }
 
   -- Smooth scrolling
-  -- use {
-  --   'karb94/neoscroll.nvim',
-  --   config = function()
-  --     require 'plugins.neoscroll'
-  --   end
-  -- }
-
-  -- CMake
-  -- use {
-  --   "cdelledonne/vim-cmake",
-  --   config = function()
-  --     require 'plugins.vim-cmake'
-  --   end
-  -- }
-
+  use {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require 'plugins.neoscroll'
+    end
+  }
 
   -- Git
   use {
@@ -198,22 +189,23 @@ return require('packer').startup{function(use)
   }
 
   -- GitHub
-  -- use {
-  --   'pwntester/octo.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-telescope/telescope.nvim',
-  --     'kyazdani42/nvim-web-devicons',
-  --   },
-  --   config = function ()
-  --     require"octo".setup()
-  --   end
-  -- }
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
 
-  -- use {
-  --   "luukvbaal/nnn.nvim",
-  --   config = function() require("nnn").setup() end
-  -- }
+  -- File Explorer & File Picker
+  use {
+    "luukvbaal/nnn.nvim",
+    config = function() require("nnn").setup() end
+  }
 
   use {
     "folke/todo-comments.nvim",

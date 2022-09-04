@@ -21,7 +21,6 @@ vim.o.smartindent = true
 vim.o.modeline = false
 vim.o.autochdir = false
 
-
 vim.wo.number = true                                -- line numbers
 vim.wo.relativenumber = true                        -- relative line numbers
 vim.wo.wrap = true                                  -- word wrapping
