@@ -1,5 +1,6 @@
 [core]
   editor = nvim
+  include = ~/.gitconfig-skydio
 
 [color]
   diff = auto
@@ -23,5 +24,49 @@
   prune = true
 
 [user]
-	name = Matias Christensen
+  name = Matias Christensen
+
+[alias]
+  # List all aliases
+  aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
+  
+  # List all remotes
+  remotes = remote -v
+
+  # Log my commits
+  logme = log --color --name-only --decorate=full --author='Matias Christensen'
+
+  # Prints a one-liner of all commits I made last week.
+  summary = log --abbrev-commit --pretty=oneline --author='Matias Christensen' --since='1 week 1 day ago' --reverse
+
+  # Get Incoming Changes
+  incoming = log ..@{u}
+
+  # Get Outgoing Changes
+  outgoing = log @{u}..
+
+  # Great for generating release notes.
+  #
+  # Example usage:
+  #
+  # Print it to stdout.
+  # $ git release-notes v0.27.3..v0.27.9
+  #
+  # To send it to the Clipboard on macOS.
+  # $ git release-notes v0.27.3..v0.27.9 | pbcopy
+  #
+  # Send it to vim for editing.
+  # $ git release-notes v0.27.3..v0.27.9 | vim -
+  #
+  # To customize this for your own org/workplace you'll need to edit two things.
+  #
+  # You can either remove the --invert-grep flag on the git log line if you
+  # don't have any commit you want to filter out (we have a bunch of robo
+  # commits that I don't want in release notes); or keep it up and update it to
+  # whatever matches the commits you want to ignore in your own release-notes.
+  release-notes = "!f() { \
+    PR_URL=\"$(git config remote.origin.url)/pull/\"; \
+    git log $1 --no-merges --oneline --pretty=format:'%s' --invert-grep --grep=\"FH-000\" | \
+    sed \"s|(#|($PR_URL|g\"; \
+  }; f"
 
