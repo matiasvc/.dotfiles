@@ -1,5 +1,5 @@
 -- Set the theme style
-vim.g.material_style = 'deep ocean'
+vim.g.material_style = 'darker'
 
 local colors = require('material.colors')
 
