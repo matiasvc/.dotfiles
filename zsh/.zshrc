@@ -120,6 +120,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
 

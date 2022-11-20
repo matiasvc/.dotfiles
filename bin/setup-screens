@@ -7,14 +7,15 @@ PHILIPS32_DPI=92
 PRECISION5550=145
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
   xrandr \
-    --output DP-1 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
-    --output DP-3 --mode 2560x1440 --pos 0x0 --rotate left \
-    --output DP-5 --mode 2560x1440 --pos 5280x0 --rotate left \
-    --output HDMI-0 --off \
     --output DP-0 --off \
+    --output DP-1   --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
+    --output HDMI-0 --mode 2560x1440 --pos 0x0 --rotate left \
+    --output DP-3   --mode 2560x1440 --pos 5280x0 --rotate left \
+    --output HDMI-1 --off \
     --output DP-2 --off \
     --output DP-4 --off \
-    --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/DP-3 --dpi ${PHILIPS32_DPI}/DP-5
+    --output DP-5 --off \
+    --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/HDMI-0 --dpi ${PHILIPS32_DPI}/DP-3
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiaschristensen-norway" ]; then
   xrandr \
@@ -25,7 +26,7 @@ elif [ $HOSTNAME = "matiaschristensen-norway" ]; then
     --output DP-1 --off \
     --output DP-3 --off \
     --output DP-5 --off \
-    --dpi ${LG43_DPI}/DP-2 --dpi ${PHILIPS32_DPI}/DP-0 --dpi ${PHILIPS32_DPI}/DP-4
+    --dpi ${LG43_DPI}/DP-0 --dpi ${PHILIPS32_DPI}/DP-2 --dpi ${PHILIPS32_DPI}/DP-4
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiaschristensen-laptop" ]; then
   xrandr \

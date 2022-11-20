@@ -45,14 +45,15 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib64
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib32
 
-
 PROFILE_EXTERNAL_PATH="${HOME}/.profile-external"
-CONFIG_FILES=$(find "${PROFILE_EXTERNAL_PATH}" -regex '.*.sh')
+if [ -d ${PROFILE_EXTERNAL_PATH} ]; then
+  CONFIG_FILES=$(find "${PROFILE_EXTERNAL_PATH}" -regex '.*.sh')
 
-for CONFIG_FILE in $CONFIG_FILES; do
-	[ -e "$CONFIG_FILE" ] || continue
-	. $CONFIG_FILE
-done
-
+  for CONFIG_FILE in $CONFIG_FILES; do
+    [ -e "$CONFIG_FILE" ] || continue
+    . $CONFIG_FILE
+  done
+fi
 
 if [ -e /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
