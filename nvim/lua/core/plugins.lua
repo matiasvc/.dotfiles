@@ -21,74 +21,101 @@ return require('packer').startup{function(use)
   use 'tpope/vim-surround'
 
   -- LSP
+
   use {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
     config = function()
-      require 'plugins.nvim-lspconfig'
+      require("mason").setup({
+          ui = {
+              icons = {
+                  package_installed = "✓",
+                  package_pending = "➜",
+                  package_uninstalled = "✗"
+              }
+          }
+      })
     end
   }
 
-  -- LSP Installer
   use {
-    'williamboman/nvim-lsp-installer',
+    "williamboman/mason-lspconfig.nvim",
     config = function()
-      require 'plugins.nvim-lsp-installer'
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "awk_ls",
+          "cmake",
+          "clangd",
+          "pyright",
+          "rust_analyzer",
+          "sumneko_lua",
+          "tsserver",
+          "zls"
+        }
+      })
+    end
+  }
+
+  use {
+    "neovim/nvim-lspconfig",
+    after = {"mason.nvim", "mason-lspconfig.nvim"},
+    config = function()
+      require("plugins.nvim-lspconfig")
     end
   }
 
   -- LSP Pictograms
-  use {
-    'onsails/lspkind-nvim',
-    config = function()
-      require 'plugins.lspkind-nvim'
-    end
-  }
+  -- use {
+  --   'onsails/lspkind-nvim',
+  --   config = function()
+  --     require 'plugins.lspkind-nvim'
+  --   end
+  -- }
 
   -- LSP Status
-  use {
-    'nvim-lua/lsp-status.nvim',
-    config = function()
-      require 'plugins.lsp-status-nvim'
-    end
-  }
+  -- use {
+  --   'nvim-lua/lsp-status.nvim',
+  --   config = function()
+  --     require 'plugins.lsp-status-nvim'
+  --   end
+  -- }
 
   -- Completion
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
-      'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
-      'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
-      'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
-      'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
-      'hrsh7th/cmp-git',          -- nvim-cmp source for git
-      'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
-      'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip',
-    },
-    config = function()
-      require 'plugins.nvim-cmp'
-    end
-  }
+  -- use {
+  --   'hrsh7th/nvim-cmp',
+  --   requires = {
+  --     'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
+  --     'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
+  --     'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
+  --     'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
+  --     'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
+  --     'hrsh7th/cmp-git',          -- nvim-cmp source for git
+  --     'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
+  --     'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
+  --     'hrsh7th/cmp-vsnip',
+  --     'hrsh7th/vim-vsnip',
+  --   },
+  --   config = function()
+  --     require 'plugins.nvim-cmp'
+  --   end
+  -- }
 
   -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    config = function()
-      require 'plugins.nvim-treesitter'
-    end
-  }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   run = ':TSUpdate',
+  --   config = function()
+  --     require 'plugins.nvim-treesitter'
+  --   end
+  -- }
 
   -- Context
-  use {
-    'lewis6991/nvim-treesitter-context',
-    after = 'nvim-treesitter',
-    config = function()
-      require 'plugins.nvim-treesitter-context'
-    end
-  }
+  -- use {
+  --   'lewis6991/nvim-treesitter-context',
+  --   after = 'nvim-treesitter',
+  --   config = function()
+  --     require 'plugins.nvim-treesitter-context'
+  --   end
+  -- }
 
   -- TabNine
   -- use {
@@ -205,14 +232,6 @@ return require('packer').startup{function(use)
   use {
     "luukvbaal/nnn.nvim",
     config = function() require("nnn").setup() end
-  }
-
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {}
-    end
   }
 
 end, config = {
