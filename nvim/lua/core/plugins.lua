@@ -80,42 +80,42 @@ return require('packer').startup{function(use)
   -- }
 
   -- Completion
-  -- use {
-  --   'hrsh7th/nvim-cmp',
-  --   requires = {
-  --     'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
-  --     'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
-  --     'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
-  --     'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
-  --     'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
-  --     'hrsh7th/cmp-git',          -- nvim-cmp source for git
-  --     'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
-  --     'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
-  --     'hrsh7th/cmp-vsnip',
-  --     'hrsh7th/vim-vsnip',
-  --   },
-  --   config = function()
-  --     require 'plugins.nvim-cmp'
-  --   end
-  -- }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
+      'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
+      'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
+      'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
+      'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
+      'hrsh7th/cmp-git',          -- nvim-cmp source for git
+      'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
+      'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+    },
+    config = function()
+      require 'plugins.nvim-cmp'
+    end
+  }
 
   -- Treesitter
-  -- use {
-  --   'nvim-treesitter/nvim-treesitter',
-  --   run = ':TSUpdate',
-  --   config = function()
-  --     require 'plugins.nvim-treesitter'
-  --   end
-  -- }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require 'plugins.nvim-treesitter'
+    end
+  }
 
   -- Context
-  -- use {
-  --   'lewis6991/nvim-treesitter-context',
-  --   after = 'nvim-treesitter',
-  --   config = function()
-  --     require 'plugins.nvim-treesitter-context'
-  --   end
-  -- }
+  use {
+    'lewis6991/nvim-treesitter-context',
+    after = 'nvim-treesitter',
+    config = function()
+      require 'plugins.nvim-treesitter-context'
+    end
+  }
 
   -- TabNine
   -- use {
@@ -128,32 +128,32 @@ return require('packer').startup{function(use)
   -- }
 
   -- Autopairs
-  -- use {
-  --   'windwp/nvim-autopairs',
-  --   event = 'InsertEnter',
-  --   config = function()
-  --     require 'plugins.nvim-autopairs'
-  --   end
-  -- }
+  use {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = function()
+      require 'plugins.nvim-autopairs'
+    end
+  }
 
   -- Status line
-  -- use {
-  --   'hoob3rt/lualine.nvim',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   config = function()
-  --     require 'plugins.lualine'
-  --   end
-  -- }
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require 'plugins.lualine'
+    end
+  }
 
   -- Buffer line
-  -- use {
-  --   'akinsho/bufferline.nvim',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   keys = { '<leader>sb' },
-  --   config = function()
-  --     require 'plugins.bufferline'
-  --   end
-  -- }
+  use {
+    'akinsho/bufferline.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    keys = { '<leader>sb' },
+    config = function()
+      require 'plugins.bufferline'
+    end
+  }
 
   -- Aerial
   -- use {
