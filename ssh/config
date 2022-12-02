@@ -8,6 +8,6 @@ Host github-personal
 
 Host remarkable
   User root
-  Hostname 192.168.1.9
+  Hostname 192.168.1.45
   AddKeysToAgent yes
   IdentityFile ~/.ssh/remarkable
