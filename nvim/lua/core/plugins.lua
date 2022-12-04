@@ -21,45 +21,31 @@ return require('packer').startup{function(use)
   use 'tpope/vim-surround'
 
   -- LSP
-
   use {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup({
-          ui = {
-              icons = {
-                  package_installed = "✓",
-                  package_pending = "➜",
-                  package_uninstalled = "✗"
-              }
-          }
-      })
-    end
-  }
+    'VonHeikemen/lsp-zero.nvim',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
 
-  use {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "awk_ls",
-          "cmake",
-          "clangd",
-          "pyright",
-          "rust_analyzer",
-          "sumneko_lua",
-          "tsserver",
-          "zls"
-        }
-      })
-    end
-  }
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-nvim-lua'},
 
-  use {
-    "neovim/nvim-lspconfig",
-    after = {"mason.nvim", "mason-lspconfig.nvim"},
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
+    },
     config = function()
-      require("plugins.nvim-lspconfig")
+      local lsp = require('lsp-zero')
+
+      lsp.preset('recommended')
+      lsp.setup()
     end
   }
 
@@ -80,24 +66,24 @@ return require('packer').startup{function(use)
   -- }
 
   -- Completion
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
-      'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
-      'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
-      'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
-      'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
-      'hrsh7th/cmp-git',          -- nvim-cmp source for git
-      'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
-      'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
-      'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip',
-    },
-    config = function()
-      require 'plugins.nvim-cmp'
-    end
-  }
+  -- use {
+  --   'hrsh7th/nvim-cmp',
+  --   requires = {
+  --     'hrsh7th/cmp-nvim-lsp',     -- nvim-cmp source for neovim builtin LSP client
+  --     'hrsh7th/cmp-nvim-lua',     -- nvim-cmp source for nvim lua
+  --     'hrsh7th/cmp-buffer',       -- nvim-cmp source for buffer words
+  --     'hrsh7th/cmp-path',         -- nvim-cmp source for filesystem paths
+  --     'hrsh7th/cmp-cmdline',      -- nvim-cmp source for vim's commands
+  --     'hrsh7th/cmp-git',          -- nvim-cmp source for git
+  --     'hrsh7th/cmp-calc',         -- nvim-cmp source for math calculations
+  --     'saadparwaiz1/cmp_luasnip', -- luasnip completion source for nvim-cmp
+  --     'hrsh7th/cmp-vsnip',
+  --     'hrsh7th/vim-vsnip',
+  --   },
+  --   config = function()
+  --     require 'plugins.nvim-cmp'
+  --   end
+  -- }
 
   -- Treesitter
   use {
