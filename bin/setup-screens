@@ -3,7 +3,7 @@
 HOSTNAME=`hostname`
 
 LG43_DPI=102
-PHILIPS32_DPI=92
+PHILIPS32_DPI=120
 PRECISION5550=145
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
   xrandr \
@@ -19,14 +19,14 @@ if [ $HOSTNAME = "matiasvc-desktop" ]; then
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiaschristensen-norway" ]; then
   xrandr \
-    --output DP-0 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
-    --output DP-2 --mode 2560x1440 --pos 0x0 --rotate left \
-    --output DP-4 --mode 2560x1440 --pos 5280x0 --rotate left \
+    --output DP-2 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
+    --output DP-4 --mode 2560x1440 --pos 0x0 --rotate left \
+    --output DP-0 --mode 2560x1440 --pos 5280x0 --rotate left \
     --output USB-C-0 --off \
     --output DP-1 --off \
     --output DP-3 --off \
     --output DP-5 --off \
-    --dpi ${LG43_DPI}/DP-0 --dpi ${PHILIPS32_DPI}/DP-2 --dpi ${PHILIPS32_DPI}/DP-4
+    --dpi ${LG43_DPI}/DP-2 --dpi ${PHILIPS32_DPI}/DP-0 --dpi ${PHILIPS32_DPI}/DP-4
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiaschristensen-laptop" ]; then
   xrandr \
