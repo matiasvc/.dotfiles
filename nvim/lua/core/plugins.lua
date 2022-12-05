@@ -220,6 +220,9 @@ return require('packer').startup{function(use)
     config = function() require("nnn").setup() end
   }
 
+  -- CMake
+  use 'cdelledonne/vim-cmake'
+
 end, config = {
   -- Move to lua dir so impatient.nvim can cache it
   compile_path = vim.fn.stdpath('config')..'/plugin/packer_compiled.lua'
