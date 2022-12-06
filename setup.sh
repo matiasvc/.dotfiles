@@ -58,11 +58,16 @@ mkdir -p ${HOME}/.jupyter
 rm -f ${HOME}/.jupyter/jupyter_notebook_config.py
 ln -s ${DOTFILES}/jupyter/jupyter_notebook_config.py ${HOME}/.jupyter/
 
-# redshift setip
+# redshift setup
 rm -f ${HOME}/.config/redshift.conf
 ln -s ${DOTFILES}/redshift/redshift.conf ${HOME}/.config/redshift.conf
 
 # udev rules
 sudo rm -f /etc/udev/rules.d/90-brightnessctl.rules
 sudo ln -s ${DOTFILES}/udev/90-brightnessctl.rules /etc/udev/rules.d/
+
+# gdb setup
+rm -f ${HOME}/.gdbinit
+ln -s ${DOTFILES}/gdb/.gdbinit ${HOME}/.gdbinit
+
 
