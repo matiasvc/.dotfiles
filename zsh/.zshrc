@@ -60,6 +60,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 alias i3config="${EDITOR} ~/.config/i3/config"
 alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
 alias dotconfig="${EDITOR} ~/.dotfiles"
+alias i3-control-center="XDG_CURRENT_DESKTOP=GNOME; gnome-control-center"
 
 # git commit lazy
 alias gclz='git commit -m "$(date)"'
