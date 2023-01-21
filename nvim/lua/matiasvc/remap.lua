@@ -40,4 +40,8 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- Regex word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- Switch between source and header with clangd
+-- TODO(Matias): Maybe put this in the LSP config instead to only enable 
+-- when clangd is loaded?
+vim.keymap.set("n", "<leader>h", ":ClangdSwitchSourceHeader<CR>")
 

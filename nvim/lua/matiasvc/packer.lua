@@ -20,13 +20,21 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   })
+  
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+  })
+  use({
+    'nvim-treesitter/playground',
+  })
+  use({
+    'nvim-treesitter/nvim-treesitter-context',
+  })
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use('nvim-treesitter/playground')
-  use('nvim-treesitter/nvim-treesitter-context')
-
-  use('theprimeagen/harpoon')
   use('mbbill/undotree')
+  use('tpope/vim-eunuch')
+  use('tpope/vim-obsession')
 
   use({
     'VonHeikemen/lsp-zero.nvim',
@@ -67,11 +75,6 @@ return require('packer').startup(function(use)
   use({
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  })
-
-  use({
-    'Shatur/neovim-session-manager',
-    requires = { {'nvim-lua/plenary.nvim'} }
   })
 
   -- Automatically set up your configuration after cloning packer.nvim

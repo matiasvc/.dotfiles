@@ -28,7 +28,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 -- Show line at column 80
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 
 -- Show whitespace
 vim.opt.list = true

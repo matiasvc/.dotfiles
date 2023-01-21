@@ -62,6 +62,9 @@ alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 alias i3-control-center="XDG_CURRENT_DESKTOP=GNOME; gnome-control-center"
 
+# Delete all local branches that are not checked out in this repo or worktree repo's
+alias git-delete-local-branches="git branch | grep -v '[+*]' | xargs git branch -D"
+
 # git commit lazy
 alias gclz='git commit -m "$(date)"'
 
