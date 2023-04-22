@@ -7,14 +7,11 @@ PHILIPS32_DPI=120
 PRECISION5550=145
 if [ $HOSTNAME = "matiasvc-desktop" ]; then
   xrandr \
-    --output DP-0 --off \
-    --output DP-1   --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
-    --output HDMI-0 --mode 2560x1440 --pos 0x0 --rotate left \
+    --output DP-1   --mode 2560x1440 --pos 0x0 --rotate left \
+    --output HDMI-2 --mode 3840x2160 --pos 1440x200 --rotate normal --primary \
     --output DP-3   --mode 2560x1440 --pos 5280x0 --rotate left \
     --output HDMI-1 --off \
-    --output DP-2 --off \
-    --output DP-4 --off \
-    --output DP-5 --off \
+    --output DP-2   --off \
     --dpi ${LG43_DPI}/DP-1 --dpi ${PHILIPS32_DPI}/HDMI-0 --dpi ${PHILIPS32_DPI}/DP-3
   notify-send "Screen layout set for ${HOSTNAME}"
 elif [ $HOSTNAME = "matiaschristensen-norway" ]; then
