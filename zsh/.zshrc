@@ -11,6 +11,7 @@ antigen use oh-my-zsh
 
 # Plugins from oh-my-zsh
 antigen bundle git
+antigen bundle bazel
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-completions

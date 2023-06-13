@@ -12,7 +12,7 @@ webcam=false                              # not to a webcam
 hflip=false                               # horizontal flip webcam
 measure_throughput=false                  # measure how fast data is being transferred
 window_title=reStream                     # stream window title is reStream
-video_filters=""                          # list of ffmpeg filters to apply
+video_filters="eq=gamma=16,transpose=1,transpose=1"                          # list of ffmpeg filters to apply
 unsecure_connection=false                 # Establish a unsecure connection that is faster
 
 # loop through arguments and process them
