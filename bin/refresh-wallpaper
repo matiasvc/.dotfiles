@@ -5,12 +5,10 @@ RW_PATH="/tmp/refresh-wallpaper"
 rm -rf $RW_PATH
 mkdir -p $RW_PATH
 
-curl -s --location --header 'Authorization: Client-ID mKhbkWGClHYBQk1uURz5-gf2sc5tVIXQNaQWQxDSy08' --request GET 'api.unsplash.com/photos/random?query=nature&orientation=landscape&count=30' >> $RW_PATH/unsplash.json
+# Select a random jpg image from the the wallpapers directory
+IMAGE_PATH=$(find ~/.dotfiles/wallpapers -type f -name "*.jpg" | shuf -n 1)
 
-IMAGE_URL="$(cat ${RW_PATH}/unsplash.json | jq -r 'sort_by(.width * .height)[-1].urls.full')"
-IMAGE_URL="$(cat ${RW_PATH}/unsplash.json | jq -r 'map(select(.width >= 6720 and .height >= 2560)) | sort_by(.likes)[-1].urls.raw')"
-
-curl -s $IMAGE_URL --output ${RW_PATH}/wp.jpg
+cp $IMAGE_PATH ${RW_PATH}/wp.jpg
 convert ${RW_PATH}/wp.jpg -resize 6720x2560^ -gravity center -extent 6720x2560 ${RW_PATH}/wp_full.jpg
 convert ${RW_PATH}/wp_full.jpg -crop 1440x2560+0+0 ${RW_PATH}/wp_left.jpg
 convert ${RW_PATH}/wp_full.jpg -crop 3840x2160+1440+200 ${RW_PATH}/wp_center.jpg
