@@ -2,14 +2,14 @@
 # A general, all-purpose extraction script.
 #
 # Default behavior: Extract archive into new directory
-# Behavior with `-c` option: Extract contents into current directory
+# Behavior with `-d` option: Extract contents into a new directory
 
-while getopts "hc" o; do case "${o}" in
-	c) extracthere="True" ;;
-	*) printf "Options:\\n   -c: Extract archive into current directory rather than a new one.\\n" && exit ;;
+while getopts "hd" o; do case "${o}" in
+	c) extractdirectory="True" ;;
+	*) printf "Options:\\n   -c: Extract archive into a new directory.\\n" && exit ;;
 esac done
 
-if [ -z "$extracthere" ]; then
+if [ -n "$extractdirectory" ]; then
 	archive="$(readlink -f "$*")" &&
 	directory="$(echo "$archive" | sed 's/\.[^\/.]*$//')" &&
 	mkdir -p "$directory" &&
