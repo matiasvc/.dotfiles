@@ -29,6 +29,7 @@ vim.keymap.set("v", "<leader>y", "\"+y")  -- Yank into system clipboard in visua
 vim.keymap.set("n", "<leader>Y", "\"+Y")  -- Yank whole line into system clipboard in normal mode
 vim.keymap.set("n", "<leader>p", "\"+p")  -- Paste from system clipboard in normal mode
 vim.keymap.set("v", "<leader>p", "\"+p")  -- Paste from system clipboard in visual mode
+vim.keymap.set('n', '<leader>F', ':let @+ = expand(\'%\')<CR>') -- Yank the path
 
 -- Miscellaneous
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")  -- Switch project with tmux session

@@ -59,7 +59,7 @@ export ZVM_VI_EDITOR='nvim'
 alias termconfig="${EDITOR} ~/.dotfiles/alacritty/alacritty.yml"
 alias zshconfig="${EDITOR} ~/.zshrc"
 alias i3config="${EDITOR} ~/.config/i3/config"
-alias nvimconfig="cd ~/.dotfiles/nvim && ${EDITOR}"
+alias nvimconfig="cd ~/.dotfiles && nvim -O nvim nvim_bak"
 alias dotconfig="${EDITOR} ~/.dotfiles"
 alias i3-control-center="XDG_CURRENT_DESKTOP=GNOME; gnome-control-center"
 alias find-todos-all="rg -n TODO"
