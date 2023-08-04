@@ -22,7 +22,7 @@ return {
       },
       {
         "<leader>fs",
-        function() 
+        function()
           require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
         end,
         desc = "Search for a specific string in the project",
