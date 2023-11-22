@@ -5,7 +5,7 @@
 # Behavior with `-d` option: Extract contents into a new directory
 
 while getopts "hd" o; do case "${o}" in
-	c) extractdirectory="True" ;;
+	d) extractdirectory="True" ;;
 	*) printf "Options:\\n   -c: Extract archive into a new directory.\\n" && exit ;;
 esac done
 
