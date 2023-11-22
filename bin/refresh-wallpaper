@@ -13,5 +13,5 @@ convert ${RW_PATH}/wp.jpg -resize 6720x2560^ -gravity center -extent 6720x2560 $
 convert ${RW_PATH}/wp_full.jpg -crop 1440x2560+0+0 ${RW_PATH}/wp_left.jpg
 convert ${RW_PATH}/wp_full.jpg -crop 3840x2160+1440+200 ${RW_PATH}/wp_center.jpg
 convert ${RW_PATH}/wp_full.jpg -crop 1440x2560+5280+0 ${RW_PATH}/wp_right.jpg
-feh --bg-center ${RW_PATH}/wp_center.jpg --bg-center ${RW_PATH}/wp_left.jpg --bg-center ${RW_PATH}/wp_right.jpg
+feh --bg-center ${RW_PATH}/wp_center.jpg --bg-center ${RW_PATH}/wp_right.jpg --bg-center ${RW_PATH}/wp_left.jpg
 
