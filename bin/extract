@@ -1,43 +1,79 @@
-#!/usr/bin/env sh
-# A general, all-purpose extraction script.
-#
-# Default behavior: Extract archive into new directory
-# Behavior with `-d` option: Extract contents into a new directory
+#!/usr/bin/env bash
+# Enhanced general, all-purpose extraction script.
 
-while getopts "hd" o; do case "${o}" in
-	d) extractdirectory="True" ;;
-	*) printf "Options:\\n   -c: Extract archive into a new directory.\\n" && exit ;;
-esac done
+# Usage: script.sh [-d] <archive_file>
+# -d: Extract archive into a new directory.
 
-if [ -n "$extractdirectory" ]; then
-	archive="$(readlink -f "$*")" &&
-	directory="$(echo "$archive" | sed 's/\.[^\/.]*$//')" &&
-	mkdir -p "$directory" &&
-	cd "$directory" || exit
-else
-	archive="$(readlink -f "$(echo "$*" | cut -d' ' -f2)")"
+print_usage() {
+    printf "Usage: $0 [-d] <archive_file>\n"
+    printf "Options:\n   -d: Extract archive into a new directory.\n"
+}
+
+extract_directory=false
+original_directory=$(pwd)
+
+while getopts ":hd" o; do
+    case "${o}" in
+        d) extract_directory=true ;;
+        *) print_usage
+           exit 1 ;;
+    esac
+done
+shift $((OPTIND-1))
+
+# Validate input
+if [ $# -ne 1 ]; then
+    print_usage
+    exit 1
 fi
 
-[ "$archive" = "" ] && printf "Give archive to extract as argument.\\n" && exit
+archive_path="$(readlink -f "$1")"
 
-if [ -f "$archive" ] ; then
-	case "$archive" in
-		*.tar.bz2|*.tbz2|*.tbz) tar xvjf "$archive" ;;
-		*.tar.xz) tar xvJf "$archive" ;;
-		*.tar.gz|*.tgz) tar xvzf "$archive" ;;
-		*.tar.zst) tar --use-compress-program=unzstd -xvf "$archive" ;;
-		*.lzma) unlzma "$archive" ;;
-		*.bz2) bunzip2 "$archive" ;;
-		*.rar) unrar x -ad "$archive" ;;
-		*.gz) gunzip "$archive" ;;
-		*.tar) tar xvf "$archive" ;;
-		*.zip) unzip "$archive" ;;
-		*.Z) uncompress "$archive" ;;
-		*.7z) 7z x "$archive" ;;
-		*.xz) unxz "$archive" ;;
-		*.exe) cabextract "$archive" ;;
-		*) printf "extract: '%s' - unknown archive method\\n" "$archive" ;;
-	esac
-else
-	printf "File \"%s\" not found.\\n" "$archive"
+if [ -z "$archive_path" ]; then
+    printf "Error: Archive path cannot be empty.\n"
+    exit 1
 fi
+
+if [ ! -f "$archive_path" ]; then
+    printf "Error: File \"%s\" not found.\n" "$archive_path"
+    exit 1
+fi
+
+if $extract_directory; then
+    directory="$(dirname "$archive_path")/$(basename "$archive_path" | sed 's/\.[^.]*$//')"
+    mkdir -p "$directory" || { printf "Error: Failed to create directory '%s'.\n" "$directory"; exit 1; }
+    cd "$directory" || { printf "Error: Failed to change directory to '%s'.\n" "$directory"; exit 1; }
+fi
+
+extract() {
+    case "$1" in
+        *.tar.bz2|*.tbz2|*.tbz) tar xvjf "$1" ;;
+        *.tar.xz) tar xvJf "$1" ;;
+        *.tar.gz|*.tgz) tar xvzf "$1" ;;
+        *.tar.zst) tar --use-compress-program=unzstd -xvf "$1" ;;
+        *.lzma) unlzma "$1" ;;
+        *.bz2) bunzip2 "$1" ;;
+        *.rar) unrar x -ad "$1" ;;
+        *.gz) gunzip "$1" ;;
+        *.tar) tar xvf "$1" ;;
+        *.zip) unzip "$1" ;;
+        *.Z) uncompress "$1" ;;
+        *.7z) 7z x "$1" ;;
+        *.xz) unxz "$1" ;;
+        *.exe) cabextract "$1" ;;
+        *) printf "Error: '%s' - unknown archive method\n" "$1"; exit 1 ;;
+    esac
+}
+
+if ! extract "$archive_path"; then
+    printf "Error: Failed to extract '%s'.\n" "$archive_path"
+    cd "$original_directory"
+    exit 1
+fi
+
+# Return to the original directory if we changed it
+if $extract_directory; then
+    cd "$original_directory"
+fi
+
+unset extract_directory original_directory archive_path directory
