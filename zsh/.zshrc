@@ -1,9 +1,32 @@
+# *** Pre instant-prompt setup
+
+# Set up anything that may produce output and therefore need to be before the instant prompt
+
+# Set the OpenAI API key.
+# As calling the 1password CLI is slow, we cache the key to `/tmp/OPENAI_API_KEY`
+OPENAI_API_KEY_FILE='/tmp/OPENAI_API_KEY'
+if [[ ! -f "${OPENAI_API_KEY_FILE}" ]]; then
+  OPENAI_API_KEY_TMP=$(op read "op://Personal/OpenAI/environment-variable")
+  
+  if [[ $? -eq 0 ]] && [[ -n "${OPENAI_API_KEY_TMP}" ]]; then
+    echo "${OPENAI_API_KEY_TMP}" > "${OPENAI_API_KEY_FILE}"
+  else
+    echo "Warning! Could not read OpenAI API key from 1password."
+  fi
+fi
+
+export OPENAI_API_KEY=$(< "${OPENAI_API_KEY_FILE}")
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+ source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
+# *** Antigen ***
 
 source ${HOME}/.zsh/antigen.zsh
 
@@ -22,6 +45,8 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
+
+# *** Environment variables ***
 
 # Autocomplete between `-` and `_`
 HYPHEN_INSENSITIVE="true"
@@ -44,16 +69,8 @@ fi
 # Use neovim as editor for `zsh-vi-mode`
 export ZVM_VI_EDITOR='nvim'
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-# aliases
+
+# *** Aliases ***
 
 # TODO: Make this work even if repo is not checked out at the path ~/.dotfiles
 alias termconfig="${EDITOR} ~/.dotfiles/alacritty/alacritty.yml"
@@ -72,17 +89,13 @@ alias git-delete-local-branches="git branch | grep -v '[+*]' | xargs git branch 
 # git commit lazy
 alias gclz='git commit -m "$(date)"'
 
-setopt +o nomatch # Don't print error if glob finds no matches
-for CONFIG_FILE in ~/.zsh/external/*.zsh; do
-	[ -e "$CONFIG_FILE" ] || continue
-	. $CONFIG_FILE
-done
-setopt -o nomatch
+
 
 # nnn config
 export NNN_PLUG='o:fzopen;p:preview-tui;i:imgview'
 export TERMINAL='alacritty'
 export NNN_FIFO='/tmp/nnn.fifo'
+
 
 n ()
 {
@@ -117,6 +130,7 @@ n ()
 export PATH="${HOME}/.cargo/bin:${PATH}"
 
 
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('${HOME}/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -137,6 +151,16 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
+
+
+# *** Load external config files ***
+
+setopt +o nomatch # Don't print error if glob finds no matches
+for CONFIG_FILE in ~/.zsh/external/*.zsh; do
+	[ -e "$CONFIG_FILE" ] || continue
+	. $CONFIG_FILE
+done
+setopt -o nomatch
 
 
 if [ -e /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh ]; then . /home/matiaschristensen/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

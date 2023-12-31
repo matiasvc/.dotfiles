@@ -24,7 +24,8 @@
   prune = true
 
 [user]
-  name = Matias Christensen
+	name = Matias Varnum
+	email = mattivc@gmail.com
 
 [alias]
   # List all aliases
