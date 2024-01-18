@@ -86,6 +86,10 @@ alias print-path-pretty='echo $PATH | tr ":" "\n"'
 # Delete all local branches that are not checked out in this repo or worktree repo's
 alias git-delete-local-branches="git branch | grep -v '[+*]' | xargs git branch -D"
 
+# Setup local git user and email for repo
+# TODO: Update this when I have a @varnum.
+alias git-setup-local-user="git config user.name 'Matias Varnum' && git config user.email 'mattivc@gmail.com'"
+
 # git commit lazy
 alias gclz='git commit -m "$(date)"'
 
