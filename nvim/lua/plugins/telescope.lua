@@ -2,6 +2,16 @@ return {
   -- Setup telescope
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "telescope.nvim",
+      dependencies = {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      },
+    },
     keys = {
       -- add a keymap to browse plugin files
       -- stylua: ignore

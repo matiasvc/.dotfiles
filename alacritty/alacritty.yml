@@ -643,6 +643,10 @@ key_bindings:
   - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
 
+  # Neovim
+  # TODO(Matias): Finish this
+  - { key: J, mods: Control|Shift, chars: "\x1b[74;5u]" }
+
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 

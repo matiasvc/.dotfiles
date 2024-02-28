@@ -171,13 +171,10 @@ bar {
 
 ### Custom
 exec --no-startup-id setxkbmap us ,mode "default"
-exec --no-startup-id xrdb ${HOME}/.dotfiles/.Xresources
-#exec --no-startup-id ${HOME}/.dotfiles/bin/setup-screens
-#exec --no-startup-id ${HOME}/.dotfiles/bin/setup-s3fs
+exec --no-startup-id ${HOME}/.dotfiles/bin/setup-screens
 exec --no-startup-id nm-applet
-exec --no-startup-id ${HOME}/.jetbrains-toolbox/jetbrains-toolbox
+exec --no-startup-id blueman-applet
 exec --no-startup-id compton
-exec --no-startup-id pidgin
 exec --no-startup-id expandrive
 exec --no-startup-id redshift-gtk
 exec --no-startup-id discord

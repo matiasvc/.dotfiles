@@ -5,7 +5,11 @@
 # Set the OpenAI API key.
 # As calling the 1password CLI is slow, we cache the key to `/tmp/OPENAI_API_KEY`
 OPENAI_API_KEY_FILE='/tmp/OPENAI_API_KEY'
-if [[ ! -f "${OPENAI_API_KEY_FILE}" ]]; then
+if [[ -f "${OPENAI_API_KEY_FILE}" ]]; then
+  export OPENAI_API_KEY=$(< "${OPENAI_API_KEY_FILE}")
+fi
+
+init-openai() {
   OPENAI_API_KEY_TMP=$(op read "op://Personal/OpenAI/environment-variable")
   
   if [[ $? -eq 0 ]] && [[ -n "${OPENAI_API_KEY_TMP}" ]]; then
@@ -13,10 +17,12 @@ if [[ ! -f "${OPENAI_API_KEY_FILE}" ]]; then
   else
     echo "Warning! Could not read OpenAI API key from 1password."
   fi
-fi
+}
 
-export OPENAI_API_KEY=$(< "${OPENAI_API_KEY_FILE}")
 
+# Setup ssh-agent
+emulate ksh -c "source $(which ssh-find-agent.sh)"
+ssh-add -l >&/dev/null || ssh-find-agent -a || eval $(ssh-agent) > /dev/null
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -26,8 +32,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-# *** Antigen ***
-
+# Antigen
 source ${HOME}/.zsh/antigen.zsh
 
 antigen use oh-my-zsh
@@ -69,6 +74,10 @@ fi
 # Use neovim as editor for `zsh-vi-mode`
 export ZVM_VI_EDITOR='nvim'
 
+export PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin/:${PATH}"
+export PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/libexec/:${PATH}"
+
+export LD_LIBRARY_PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/lib/:${LD_LIBRARY_PATH}"
 
 # *** Aliases ***
 
