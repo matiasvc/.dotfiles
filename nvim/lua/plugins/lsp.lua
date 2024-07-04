@@ -3,6 +3,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     init = function()
+      vim.lsp.set_log_level("OFF")
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- keys[#keys + 1] = { "gd", "<cmd>lua vim.lsp.buf.definition()<cr>" }
       -- keys[#keys + 1] = { "K", "<cmd>lua vim.lsp.buf.hover()<cr>" }

@@ -41,3 +41,7 @@ vim.g.autoformat = false  -- Disable autoformat on save
 -- vim.opt.isfname:append("@-@")  -- Add @-@ to the list of characters that can be part of a filename
 -- vim.opt.updatetime = 50  -- Lower updatetime to 50ms for a better 'cursorhold' experience
 
+-- Folding
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"  -- Set foldexpr to treesitter
+vim.opt.foldmethod = "expr"  -- Set foldmethod to expr that we set above
+

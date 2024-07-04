@@ -14,6 +14,7 @@ init-openai() {
   
   if [[ $? -eq 0 ]] && [[ -n "${OPENAI_API_KEY_TMP}" ]]; then
     echo "${OPENAI_API_KEY_TMP}" > "${OPENAI_API_KEY_FILE}"
+    export OPENAI_API_KEY=$(< "${OPENAI_API_KEY_FILE}")
   else
     echo "Warning! Could not read OpenAI API key from 1password."
   fi
@@ -23,6 +24,20 @@ init-openai() {
 # Setup ssh-agent
 emulate ksh -c "source $(which ssh-find-agent.sh)"
 ssh-add -l >&/dev/null || ssh-find-agent -a || eval $(ssh-agent) > /dev/null
+
+# Load fzf
+if [[ ! "$PATH" == *${HOME}/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}${HOME}/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+source "${HOME}/.fzf/shell/completion.zsh"
+
+# Key bindings
+# ------------
+source "${HOME}/.fzf/shell/key-bindings.zsh"
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -159,8 +174,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Load fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
