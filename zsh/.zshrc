@@ -89,10 +89,7 @@ fi
 # Use neovim as editor for `zsh-vi-mode`
 export ZVM_VI_EDITOR='nvim'
 
-export PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/bin/:${PATH}"
-export PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/libexec/:${PATH}"
-
-export LD_LIBRARY_PATH="${HOME}/.dotfiles/tools/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/lib/:${LD_LIBRARY_PATH}"
+export PATH="${HOME}/.dotfiles/tools/zig-linux-x86_64-0.12.0-dev.3340+1b8d1b18c/:${PATH}"
 
 # *** Aliases ***
 
