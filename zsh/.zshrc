@@ -89,20 +89,23 @@ fi
 # Use neovim as editor for `zsh-vi-mode`
 export ZVM_VI_EDITOR='nvim'
 
-export PATH="${HOME}/.dotfiles/tools/zig-linux-x86_64-0.12.0-dev.3340+1b8d1b18c/:${PATH}"
-
 # *** Aliases ***
 
 # TODO: Make this work even if repo is not checked out at the path ~/.dotfiles
-alias termconfig="${EDITOR} ~/.dotfiles/alacritty/alacritty.yml"
-alias zshconfig="${EDITOR} ~/.zshrc"
-alias i3config="${EDITOR} ~/.config/i3/config"
-alias nvimconfig="cd ~/.dotfiles && nvim -O nvim nvim_bak"
-alias dotconfig="${EDITOR} ~/.dotfiles"
-alias i3-control-center="XDG_CURRENT_DESKTOP=GNOME; gnome-control-center"
-alias find-todos-all="rg -n TODO"
-alias find-todos-mine="rg -n 'TODO\((Matias|matias|MATIAS)\)'"
-alias print-path-pretty='echo $PATH | tr ":" "\n"'
+alias mv-edit-term-config="${EDITOR} ~/.dotfiles/alacritty/alacritty.yml"
+alias mv-edit-zsh-config="${EDITOR} ~/.zshrc"
+alias mv-edit-i3-config="${EDITOR} ~/.config/i3/config"
+alias mv-edit-nvim-config="cd ~/.dotfiles && nvim -O nvim nvim_bak"
+alias mv-edit-dot-config="${EDITOR} ~/.dotfiles"
+
+alias mv-open-i3-control-center="XDG_CURRENT_DESKTOP=GNOME; gnome-control-center"
+
+alias mv-git-find-todos-all="rg -n TODO"
+alias mv-git-find-todos-mine="rg -n 'TODO\((Matias|matias|MATIAS)\)'"
+
+alias mv-path-print-pretty='echo $PATH | tr ":" "\n"'
+alias mv-ld-library-path-print-pretty='echo $LD_LIBRARY_PATH | tr ":" "\n"'
+
 
 # Delete all local branches that are not checked out in this repo or worktree repo's
 alias git-delete-local-branches="git branch | grep -v '[+*]' | xargs git branch -D"
