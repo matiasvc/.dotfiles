@@ -269,7 +269,7 @@ cursor:
 #working_directory: None
 
 # Send ESC (\x1b) before characters when alt is pressed.
-#alt_send_esc: true
+alt_send_esc: true
 
 #mouse:
   # Click settings
@@ -642,10 +642,6 @@ key_bindings:
   - { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   - { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   - { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
-
-  # Neovim
-  # TODO(Matias): Finish this
-  - { key: J, mods: Control|Shift, chars: "\x1b[74;5u]" }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
