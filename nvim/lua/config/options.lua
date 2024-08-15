@@ -3,3 +3,4 @@
 -- Add any additional options here
 
 vim.g.autoformat = false -- Auto-format on save
+vim.opt.colorcolumn = "80" -- Highlight column 80

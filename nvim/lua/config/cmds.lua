@@ -23,5 +23,5 @@ vim.api.nvim_create_user_command("CopyCurrentPathAndLines", function (opts)
   end
 
   vim.fn.setreg("+", result)
-  vim.notify("Copied path to clipboard: " .. result)
+  vim.notify("Copied path with line numbers to clipboard: " .. result)
 end, { range = true })

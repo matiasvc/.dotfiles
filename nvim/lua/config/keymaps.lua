@@ -12,3 +12,6 @@ local map = vim.keymap.set
 -- map("i", "K", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 -- map("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 -- map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+
+-- Switch between source and header using `clangd`
+map("n", "<leader>ch", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle source/header file"})

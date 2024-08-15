@@ -5,8 +5,8 @@
 # -d: Extract archive into a new directory.
 
 print_usage() {
-    printf "Usage: $0 [-d] <archive_file>\n"
-    printf "Options:\n   -d: Extract archive into a new directory.\n"
+    printf "Usage: %s [-d] <archive_file>\n" "$0"
+    printf "Options:\n\t-d: Create a new directoy and extract into this.\n"
 }
 
 extract_directory=false
@@ -67,13 +67,13 @@ extract() {
 
 if ! extract "$archive_path"; then
     printf "Error: Failed to extract '%s'.\n" "$archive_path"
-    cd "$original_directory"
+    cd "$original_directory" || exit
     exit 1
 fi
 
 # Return to the original directory if we changed it
 if $extract_directory; then
-    cd "$original_directory"
+    cd "$original_directory" || exit
 fi
 
 unset extract_directory original_directory archive_path directory
