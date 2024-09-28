@@ -5,13 +5,78 @@ RW_PATH="/tmp/refresh-wallpaper"
 rm -rf $RW_PATH
 mkdir -p $RW_PATH
 
-# Select a random jpg image from the the wallpapers directory
+# Select a random jpg image from the wallpapers directory
 IMAGE_PATH=$(find ~/.dotfiles/wallpapers -type f -name "*.jpg" | shuf -n 1)
 
-cp $IMAGE_PATH ${RW_PATH}/wp.jpg
-convert ${RW_PATH}/wp.jpg -resize 6720x2560^ -gravity center -extent 6720x2560 ${RW_PATH}/wp_full.jpg
-convert ${RW_PATH}/wp_full.jpg -crop 1440x2560+0+0 ${RW_PATH}/wp_left.jpg
-convert ${RW_PATH}/wp_full.jpg -crop 3840x2160+1440+200 ${RW_PATH}/wp_center.jpg
-convert ${RW_PATH}/wp_full.jpg -crop 1440x2560+5280+0 ${RW_PATH}/wp_right.jpg
-feh --bg-center ${RW_PATH}/wp_center.jpg --bg-center ${RW_PATH}/wp_right.jpg --bg-center ${RW_PATH}/wp_left.jpg
+# Declare associative arrays to store monitor information
+declare -A monitor_names
+declare -A resolutions
+declare -A positions
 
+# Get monitor information from xrandr
+index=0
+xrandr_output=$(xrandr | grep " connected")
+
+while read -r line; do
+    monitor=$(echo "$line" | awk '{print $1}')
+    res_pos=$(echo "$line" | grep -o '[0-9]\+x[0-9]\++[0-9]\++[0-9]\+')
+    res=$(echo "$res_pos" | awk -F'+' '{print $1}')
+    pos_x=$(echo "$res_pos" | awk -F'+' '{print $2}')
+    pos_y=$(echo "$res_pos" | awk -F'+' '{print $3}')
+
+    monitor_names[$index]=$monitor
+    resolutions[$index]=$res
+    positions[$index]="$pos_x,$pos_y"
+    ((index++))
+done <<< "$xrandr_output"
+
+# Calculate total virtual screen size
+total_width=0
+total_height=0
+
+for i in "${!monitor_names[@]}"; do
+    res=${resolutions[$i]}
+    pos=${positions[$i]}
+    res_width=$(echo "$res" | awk -Fx '{print $1}')
+    res_height=$(echo "$res" | awk -Fx '{print $2}')
+    pos_x=$(echo "$pos" | awk -F',' '{print $1}')
+    pos_y=$(echo "$pos" | awk -F',' '{print $2}')
+
+    right_edge=$((pos_x + res_width))
+    bottom_edge=$((pos_y + res_height))
+
+    if [ $right_edge -gt $total_width ]; then
+        total_width=$right_edge
+    fi
+    if [ $bottom_edge -gt $total_height ]; then
+        total_height=$bottom_edge
+    fi
+done
+
+# Resize the image to fit the total virtual screen size
+convert "$IMAGE_PATH" -resize "${total_width}x${total_height}^" -gravity center -extent "${total_width}x${total_height}" "${RW_PATH}/wp_full.jpg"
+
+# Crop images for each monitor
+for i in "${!monitor_names[@]}"; do
+    monitor=${monitor_names[$i]}
+    res=${resolutions[$i]}
+    pos=${positions[$i]}
+    res_width=$(echo "$res" | awk -Fx '{print $1}')
+    res_height=$(echo "$res" | awk -Fx '{print $2}')
+    pos_x=$(echo "$pos" | awk -F',' '{print $1}')
+    pos_y=$(echo "$pos" | awk -F',' '{print $2}')
+
+    output_file="${RW_PATH}/wp_${monitor}.jpg"
+    convert "${RW_PATH}/wp_full.jpg" -crop "${res_width}x${res_height}+${pos_x}+${pos_y}" "$output_file"
+done
+
+# Set the wallpapers
+feh_command="feh"
+for i in "${!monitor_names[@]}"; do
+    monitor=${monitor_names[$i]}
+    output_file="${RW_PATH}/wp_${monitor}.jpg"
+    feh_command+=" --bg-center $output_file"
+done
+
+# Execute the feh command
+eval "$feh_command"
