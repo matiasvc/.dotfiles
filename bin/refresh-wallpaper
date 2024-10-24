@@ -71,12 +71,13 @@ for i in "${!monitor_names[@]}"; do
 done
 
 # Set the wallpapers
-feh_command="feh"
+feh_command="feh --no-fehbg --bg-center"
 for i in "${!monitor_names[@]}"; do
     monitor=${monitor_names[$i]}
     output_file="${RW_PATH}/wp_${monitor}.jpg"
-    feh_command+=" --bg-center $output_file"
+    feh_command+=" $output_file"
 done
 
 # Execute the feh command
 eval "$feh_command"
+echo "$feh_command"

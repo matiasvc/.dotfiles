@@ -50,3 +50,42 @@ vim.api.nvim_create_user_command("CopyCurrentPathAndLinesWithContent", function 
   vim.fn.setreg("+", result)
   vim.notify("Copied path with line numbers and text to clipboard:\n" .. result)
 end, { range = true })
+
+local git_commit_template = [[[TAG] Title
+
+Description
+
+Implements [SW-](https://skydio.atlassian.net/browse/SW-)
+
+Testing:
+
+[Worklog]()
+
+Topic: matias_
+Relative:
+#Branches:
+# 3DS
+#Reviewers: peter-skydio, etienne-dupont-skydio, george-hito-skydio, vincent-lecrubier-skydio, ayush-baid-skydio, alexander-kristoffersen-skydio
+# Rayworld
+#Reviewers: peter-skydio, alexander-kristoffersen-skydio, elia-kaufmann-skydio, danny-skydio
+# VPS
+#Reviewers: peter-skydio, ryan-brott-skydio, duncan-mazza-skydio
+# IWYU
+#Reviewers: aaron-skydio, danny-skydio
+Assignees: 
+Label: gh-comments-on-failure
+#Relative-Branch:
+]]
+
+-- Create a user command 'PasteMyString' to insert the string into the current buffer
+vim.api.nvim_create_user_command('PasteCommitTemplate', function()
+  -- Get the current cursor position
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+  -- Insert the string at the current cursor position
+  vim.api.nvim_buf_set_lines(0, row, row, false, vim.split(git_commit_template, '\n'))
+end, {})
+
+
+
+

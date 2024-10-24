@@ -74,4 +74,6 @@ ln -s "${DOTFILES}"/gdb/.gdbinit "${HOME}"/.gdbinit
 rm -f "${HOME}"/.cuda-gdbinit
 ln -s "${DOTFILES}"/cuda-gdb/.cuda-gdbinit "${HOME}"/.cuda-gdbinit
 
-
+# lazygit
+rm -f "${HOME}"/.config/lazygit/config.yml
+ln -s "${DOTFILES}"/lazygit/config.yml "${HOME}"/.config/lazygit/config.yml

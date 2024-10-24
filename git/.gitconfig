@@ -71,3 +71,5 @@
     sed \"s|(#|($PR_URL|g\"; \
   }; f"
 
+[commit]
+	template = /home/matiaschristensen/.gitmessage

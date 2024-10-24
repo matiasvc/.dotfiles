@@ -1,0 +1,23 @@
+gui:
+  language: "en"
+  showRandomTip: false
+  showBottomLine: false
+  showIcons: true
+git:
+  parseEmoji: true
+os:
+  edit: "nvim"
+keybinding:
+  commits:
+    pasteCommits: "v"
+customCommands:
+  - key: "<c-g>"
+    command: "bazel run //tools/gazelle"
+    context: "global"
+    description: "gazelle"
+    subprocess: true
+  - key: "<c-u>"
+    command: "revup upload"
+    context: "global"
+    description: "revup upload"
+    subprocess: true
