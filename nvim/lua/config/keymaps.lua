@@ -14,7 +14,7 @@ local map = vim.keymap.set
 -- map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- Switch between source and header using `clangd`
---map("n", "<leader>ch", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle source/header file"})
+map("n", "<leader>ch", ":ClangdSwitchSourceHeader<CR>", { desc = "Toggle source/header file"})
 
 -- Switch focus to the neo-tree window
 map("n", "<leader>o", ":Neotree focus<CR>", { desc="Focus Neotree window"})
