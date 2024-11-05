@@ -109,11 +109,15 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # move workspace betweene screens
 bindsym $mod+Shift+o move workspace to output left
-bindsym $mod+Shift+p move workspace to output right
+bindsym $mod+Shift+p move workspace to output down
+bindsym $mod+Shift+bracketleft move workspace to output up
+bindsym $mod+Shift+bracketright move workspace to output right
 
 # move focus betweene screens
 bindsym $mod+o focus output left
-bindsym $mod+p focus output right
+bindsym $mod+p focus output down
+bindsym $mod+bracketleft focus output up
+bindsym $mod+bracketright focus output right
 
 # scratchpad windows
 bindsym $mod+Shift+minus move scratchpad
@@ -199,8 +203,4 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master playback 5%- unmute; exec
 
 bindsym XF86MonBrightnessUp exec set-brightness +
 bindsym XF86MonBrightnessDown exec set-brightness -
-
-bindsys XF86KbdBrightnessUp exec macbook-lighter-kbd --inc 25; exec notify-send "Keyboard Backlight Up"
-bindsys XF86KbdBrightnessDown exec macbook-lighter-kbd --dec 25; exec notify-send "Kayboard Backlight Down"
-
 
