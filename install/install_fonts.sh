@@ -4,7 +4,7 @@
 
 echo 'Installing nerd-fonts'
 
-NERD_FONTS_VERSION='2.2.2'
+NERD_FONTS_VERSION='3.2.1'
 git clone --depth 1 --branch v${NERD_FONTS_VERSION} https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts
 /tmp/nerd-fonts/install.sh Hack
 
