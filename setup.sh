@@ -10,9 +10,9 @@ rm -f "${HOME}"/.profile
 ln -s "${DOTFILES}"/profile/.profile "${HOME}"/.profile
 
 # alacritty setup
-rm -f "${HOME}"/.config/alacritty/alacritty.yml
-mkdir -p "${HOME}"/.config/alacritty
-ln -s "${DOTFILES}"/alacritty/alacritty.yml "${HOME}"/.config/alacritty/alacritty.yml
+rm -rf "${HOME}"/.config/alacritty/
+mkdir -p "${HOME}"/.config/
+ln -s "${DOTFILES}"/alacritty "${HOME}"/.config/alacritty
 
 # zsh setup
 rm -f "${HOME}"/.zshrc

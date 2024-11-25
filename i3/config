@@ -184,6 +184,7 @@ exec --no-startup-id redshift-gtk
 exec --no-startup-id discord
 exec --no-startup-id unclutter --timeout 3 --jitter 5
 exec --no-startup-id refresh-wallpaper
+exec --no-startup-id xinput set-prop 13 "libinput Tapping Enabled" 1
 
 # Keyboard Layout
 set $keyboard_layout Keyboard Layout: (n) Norwegian, (e) US English
@@ -198,9 +199,10 @@ mode "$keyboard_layout" {
 bindsym $mod+shift+Z mode "$keyboard_layout"
 
 # Volume
-bindsym XF86AudioRaiseVolume exec amixer -q set Master playback 5%+ unmute; exec notify-send "Volume Up"
-bindsym XF86AudioLowerVolume exec amixer -q set Master playback 5%- unmute; exec notify-send "Volume Down"
+bindsym XF86AudioMute exec amiser set Master toggle && notify-send "Mute"
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ && notify-send "Volume Up"
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- && notify-send "Volume Down"
 
-bindsym XF86MonBrightnessUp exec set-brightness +
-bindsym XF86MonBrightnessDown exec set-brightness -
+bindsym XF86MonBrightnessUp exec notify-send "Brightness Up"
+bindsym XF86MonBrightnessDown exec notify-send "Brightness Down"
 
