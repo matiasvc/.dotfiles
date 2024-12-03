@@ -12,3 +12,7 @@ vim.opt.laststatus = 3
 
 -- Disable the mouse
 vim.opt.mouse = ""
+
+
+-- Disable lsp logging
+vim.lsp.set_log_level("OFF")
