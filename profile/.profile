@@ -38,8 +38,16 @@ if [ -d "$HOME/.cargo/bin" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+if [ -d "$HOME/zig" ] ; then
+    PATH="$HOME/zig:$PATH"
+fi
+
 if [ -d "$HOME/miniconda3/envs/dotfiles/bin" ] ; then
     PATH="$HOME/miniconda3/envs/dotfiles/bin:$PATH"
+fi
+
+if [ -d "$HOME/miniconda3/bin" ] ; then
+    PATH="$HOME/miniconda3/bin:$PATH"
 fi
 
 PROFILE_EXTERNAL_PATH="${HOME}/.profile-external"

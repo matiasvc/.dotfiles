@@ -25,11 +25,16 @@
 
 [user]
 	name = Matias Varnum
-	email = mattivc@gmail.com
+	email = matias.christensen@skydio.com
+
+[pretty]
+        oneline-with-topic = "tformat:%C(auto)%h%(decorate) %s %Cblue(%(trailers:key=topic,separator=,valueonly=true)) -> %Cred(%(trailers:key=relative,separator=,valueonly=true))"
 
 [alias]
   # List all aliases
   aliases = "!git config -l | grep ^alias | cut -c 7- | sort"
+
+  show-stack = log --pretty=oneline-with-topic origin/HEAD..HEAD
   
   # List all remotes
   remotes = remote -v

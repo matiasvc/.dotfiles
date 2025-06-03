@@ -9,6 +9,8 @@ vim.opt.colorcolumn = "120" -- Highlight column 120
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
 
+-- Disable swapfile
+vim.opt.swapfile = false
 
 -- Disable the mouse
 vim.opt.mouse = ""
@@ -16,3 +18,5 @@ vim.opt.mouse = ""
 
 -- Disable lsp logging
 vim.lsp.set_log_level("OFF")
+-- Disable autoformat on save for Zig
+vim.g.zig_fmt_autosave = 0
